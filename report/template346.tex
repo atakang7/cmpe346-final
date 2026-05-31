@@ -18,7 +18,7 @@
 \submissiondate{June 2026}
 
 \abstract{
-In this paper, we performed text classification on three different NLP tasks using an identical deep learning model. Each task is an application of classification in the NLP field: Media bias detection of news articles, [Student 2 task], and [Student 3 task]. Three models are applied to each task, including one traditional deep learning model Bidirectional LSTM, and two transformer-based pre-trained models BERT and RoBERTa. The three models are then fine-tuned on the dataset for each specific task, and accuracy and weighted F1-score are used as evaluation metrics. For all three tasks, we confirmed that transformer-based models outperform Bidirectional LSTM, and RoBERTa attains the best results.
+In this paper, we investigate text classification across three distinct NLP tasks: media bias detection in news articles, [Student 2 task], and [Student 3 task]. Each task represents a different application of classification in the NLP domain. Three deep learning architectures are evaluated across all tasks: a Bidirectional LSTM trained from scratch, and two transformer-based pretrained models, BERT and RoBERTa. Each model is fine-tuned on a task-specific dataset and evaluated using accuracy and weighted F1-score. For media bias detection, RoBERTa achieves the best performance with 84.6\% accuracy and a weighted F1-score of 0.846. Across all three tasks, transformer-based models consistently outperform the BiLSTM baseline.
 }
 
 \begin{document}
@@ -66,14 +66,14 @@ The transformer models (BERT and RoBERTa) are fine-tuned from the beginning with
 \section{Experiments \& Findings}
 \textbf{Dataset.} The BABE dataset (Bias Annotations By Experts), introduced by Spinde et al. \cite{spinde2021}, is employed for this task. The Hugging Face distribution used in this project contains 4,121 news sentences gathered from a diverse collection of sources, each rated as either biased (1) or not biased (0) by trained annotators; it is divided into 3,121 training and 1,000 test samples \cite{huggingfaceBABE}. Since the labeling is conducted with the help of expert annotators and has been designed carefully, it serves as a reliable reference for media bias detection.
 
-\textbf{Training Configuration.} For all models, 3 epochs of training are performed with early stopping on F1 score on the validation set, a stopping threshold of 0.5\% difference between consecutive performances and a patience of 2 epochs. A batch size of 16 and a maximum sequence length of 128 are set. The learning rate for transformers is $2 \times 10^{-5}$ and for the LSTM is $1 \times 10^{-3}$. All models are trained on an NVIDIA GeForce RTX 3060 Laptop GPU.
+\textbf{Training Configuration.} For all models, up to 3 epochs of training are performed with early stopping monitored on a held-out validation set (10\% of the training data), using a minimum improvement threshold of 0.5\% weighted F1 and a patience of 2 epochs. A batch size of 16 and a maximum sequence length of 128 tokens are used. The learning rate is $2 \times 10^{-5}$ for transformer models and $1 \times 10^{-3}$ for the LSTM. All experiments are run on an NVIDIA GeForce RTX 3060 Laptop GPU.
 
 \textbf{Results.} Table \ref{tab:atakan_results} presents the performance of each model on the BABE test set.
 \begin{table}[h]
     \centering
     \begin{tabular}{lcc}
         \toprule
-        \textbf{Model} & \textbf{Accuracy} & \textbf{F1} \\
+        \textbf{Model} & \textbf{Accuracy} & \textbf{Weighted F1} \\
         \midrule
         LSTM      & 0.6560 & 0.6511 \\
         BERT      & 0.8260 & 0.8266 \\
@@ -89,25 +89,25 @@ Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scor
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\linewidth]{figures/model_comparison.png}
-    \caption{Accuracy and F1 score comparison across LSTM, BERT, and RoBERTa.}
+    \caption{RoBERTa achieves the highest accuracy and weighted F1, with both transformer models substantially outperforming BiLSTM.}
     \label{fig:comparison}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\linewidth]{figures/training_curves.png}
-    \caption{Training loss per epoch for each model.}
+    \caption{Training loss decreases across all three models; transformer models start lower and converge faster than BiLSTM.}
     \label{fig:loss}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{figures/confusion_matrices.png}
-    \caption{Confusion matrices on the BABE test set for each model.}
+    \caption{Confusion matrices showing RoBERTa and BERT classify both classes more reliably than BiLSTM, which struggles particularly on biased sentences.}
     \label{fig:confusion}
 \end{figure}
 
-\textbf{Qualitative Examples.} Table \ref{tab:examples} presents selected test sentences illustrating correct predictions, the transformer advantage over LSTM, and disagreements between BERT and RoBERTa.
+\textbf{Qualitative Examples.} Table \ref{tab:examples} presents four representative test sentences selected to illustrate three patterns: cases where all models agree correctly, cases where BiLSTM fails but both transformers succeed, and a case where BERT and RoBERTa disagree.
 
 \begin{table}[h]
 \centering
@@ -137,7 +137,7 @@ From these figures, it is clear that there is a performance hierarchy across the
 
 BERT scores well, gaining 82.6\% accuracy and an F1 score of 0.827, demonstrating the power of transfer learning. The confusion matrix in Figure \ref{fig:confusion} shows that BERT handles both classes much more reliably than the LSTM, with fewer misclassifications on biased sentences.
 
-RoBERTa achieves 84.6\% accuracy and 0.846 F1 score. The RoBERTa paper attributes its downstream improvements to a more carefully optimized pre-training procedure, including the removal of the next sentence prediction objective, dynamic masking, larger batches, and more training data \cite{liu2019}. The training loss curve in Figure \ref{fig:loss} shows that RoBERTa converges more smoothly than BERT, which is consistent with its more robust pretraining. The results in this experiment are consistent with that expectation, since RoBERTa is the strongest of the three tested architectures.
+RoBERTa achieves 84.6\% accuracy and 0.846 weighted F1, making it the best performing model in this study. The RoBERTa paper attributes its downstream improvements to a more carefully optimized pre-training procedure: the removal of the next sentence prediction objective, dynamic masking, larger batches, and more training data \cite{liu2019}. These pretraining differences translate to a measurable advantage on the media bias detection task, even though the margin over BERT is modest at approximately 2 percentage points.
 
 \newpage
 
