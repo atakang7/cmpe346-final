@@ -112,20 +112,20 @@ Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scor
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{p{7.5cm}ccc}
+\begin{tabular}{p{6.5cm}cccc}
 \toprule
-\textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT / RoBERTa} \\
+\textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT} & \textbf{RoBERTa} \\
 \midrule
-\textit{``Nearly 78 percent of Americans report experiencing concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark \\
+\textit{``Nearly 78\% of Americans report experiencing concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``As the Black Lives Matter movement grows, companies like Nike, Target, and Google have made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark \\
+\textit{``Companies like Nike and Google have made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``The case of Rahaf Mohammed al-Qunun drawn new global attention to Saudi Arabia's strict social rules...''} & NB & B\,\(\times\) & NB\,\checkmark \\
+\textit{``Rahaf Mohammed al-Qunun's case drew global attention to Saudi Arabia's strict social rules...''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & BERT: NB\,\(\times\) \quad RoBERTa: B\,\checkmark \\
+\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,\(\times\) & B\,\checkmark \\
 \bottomrule
 \end{tabular}
-\caption{Qualitative prediction examples. NB = Not Biased, B = Biased. \checkmark = correct, \(\times\) = incorrect.}
+\caption{Qualitative prediction examples. NB = Not Biased, B = Biased. \checkmark\,= correct, \(\times\)\,= incorrect.}
 \label{tab:examples}
 \end{table}
 
@@ -204,9 +204,7 @@ In this paper, three different deep learning architectures were implemented for 
 
 \bibitem{spinde2021} T. Spinde et al., ``Neural media bias detection using distant supervision with BABE -- Bias Annotations By Experts,'' in \textit{Findings of the Association for Computational Linguistics: EMNLP 2021}, 2021, pp. 1166--1177.
 
-\bibitem{huggingfaceBABE} Media Bias Group, ``BABE dataset,'' Hugging Face Datasets, 2021. [Online]. Available: https://huggingface.co/datasets/mediabiasgroup/BABE
-
-\bibitem{huggingfaceBABE} Media Bias Group, ``BABE,'' Hugging Face Datasets. [Online]. Available: \url{https://huggingface.co/datasets/mediabiasgroup/BABE}
+\bibitem{huggingfaceBABE} Media Bias Group, ``BABE dataset,'' Hugging Face Datasets, 2021. [Online]. Available: \url{https://huggingface.co/datasets/mediabiasgroup/BABE}
 
 \end{thebibliography}
 
