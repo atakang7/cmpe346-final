@@ -105,18 +105,19 @@ RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
 \end{frame}
 
 \begin{frame}{Atakan — Prediction Examples}
-\small
-\begin{tabular}{p{6.8cm}cccc}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{8cm}cccc}
 \toprule
 \textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT} & \textbf{RoBERTa} \\
 \midrule
-\textit{``Nearly 78\% of Americans report concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\[0.25cm]
-\textit{``Companies like Nike and Google made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\[0.25cm]
-\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,\(\times\) & B\,\checkmark \\
+\textit{``Nearly 78\% of Americans report concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\[0.3cm]
+\textit{``Companies like Nike and Google made Juneteenth a paid holiday.''} & NB & B\,$\times$ & NB\,\checkmark & NB\,\checkmark \\[0.3cm]
+\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,$\times$ & B\,\checkmark \\
 \bottomrule
-\end{tabular}
-\vspace{0.15cm}
-{\footnotesize NB = Not Biased \quad B = Biased\\[0.1cm] \checkmark\,= correct \quad $\times$\,= incorrect}
+\end{tabular}%
+}
+\vspace{0.2cm}
+{\footnotesize NB = Not Biased \quad B = Biased \quad \checkmark\,= correct \quad $\times$\,= incorrect}
 \end{frame}
 
 \begin{frame}{Atakan — Conclusion}
