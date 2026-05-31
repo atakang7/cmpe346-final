@@ -1,0 +1,21 @@
+# No notebooks — per project rules (no incomplete notebooks with arbitrary executions)
+*.ipynb
+.ipynb_checkpoints/
+
+# No model weights or datasets
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.h5
+*.pkl
+*.csv
+*.json
+!results/*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/

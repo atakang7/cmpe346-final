@@ -1,8 +1,10 @@
 """
 Main entry point. Trains and evaluates LSTM, BERT, and RoBERTa on BABE dataset.
-Run: python main.py
+Run: python main.py — results saved to results/results.json
 """
 import torch
+import json
+import os
 from torch.utils.data import DataLoader
 from dataset import BABEDataset, get_vocab
 from models import LSTMClassifier, get_transformer_model
@@ -76,3 +78,15 @@ if __name__ == "__main__":
     print("-" * 34)
     for model, metrics in results.items():
         print(f"{model:<12} {metrics['accuracy']:>10} {metrics['f1']:>10}")
+
+    output = {
+        "student": "Atakan Gül",
+        "student_id": "121200152",
+        "topic": "Media Bias Detection in News",
+        "dataset": "mediabiasgroup/BABE",
+        "results": results,
+    }
+    os.makedirs("results", exist_ok=True)
+    with open("results/results.json", "w") as f:
+        json.dump(output, f, indent=2)
+    print("\nResults saved to results/results.json")
