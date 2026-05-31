@@ -1,10 +1,12 @@
 """
 Main entry point. Trains and evaluates LSTM, BERT, and RoBERTa on BABE dataset.
 Run: python main.py — results saved to results/results.json
+Trained models are saved to saved_models/ and reused on subsequent runs.
 """
 import torch
 import json
 import os
+import pickle
 from torch.utils.data import DataLoader
 from dataset import BABEDataset, get_vocab
 from models import LSTMClassifier, get_transformer_model
@@ -16,6 +18,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 EPOCHS = 3
 BATCH_SIZE = 16
 MAX_LENGTH = 128
+SAVED_MODELS_DIR = "saved_models"
 
 MODELS = {
     "BERT": "bert-base-uncased",
@@ -45,8 +48,19 @@ def run_transformer(name, model_name):
     test_ds = BABEDataset("test", tokenizer_name=model_name, max_length=MAX_LENGTH)
     train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
     test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE)
+
+    save_path = os.path.join(SAVED_MODELS_DIR, f"{name}.pt")
     model = get_transformer_model(model_name)
-    model = train(model, train_loader, test_loader, epochs=EPOCHS, lr=2e-5, device=DEVICE)
+    if os.path.exists(save_path):
+        print(f"Loading saved model from {save_path}")
+        model.load_state_dict(torch.load(save_path, map_location=DEVICE))
+        model.to(DEVICE)
+    else:
+        model = train(model, train_loader, test_loader, epochs=EPOCHS, lr=2e-5, device=DEVICE)
+        os.makedirs(SAVED_MODELS_DIR, exist_ok=True)
+        torch.save(model.state_dict(), save_path)
+        print(f"Model saved to {save_path}")
+
     results = evaluate(model, test_loader, DEVICE)
     print(f"{name} → Accuracy: {results['accuracy']} | F1: {results['f1']}")
     return results
@@ -60,8 +74,22 @@ def run_lstm():
     collate_fn = lambda b: collate_lstm(b, vocab, MAX_LENGTH)
     train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
     test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE, collate_fn=collate_fn)
+
+    save_path = os.path.join(SAVED_MODELS_DIR, "LSTM.pt")
+    vocab_path = os.path.join(SAVED_MODELS_DIR, "LSTM_vocab.pkl")
     model = LSTMClassifier(vocab_size=len(vocab))
-    model = train(model, train_loader, test_loader, epochs=EPOCHS, lr=1e-3, device=DEVICE, use_scheduler=False)
+    if os.path.exists(save_path):
+        print(f"Loading saved model from {save_path}")
+        model.load_state_dict(torch.load(save_path, map_location=DEVICE))
+        model.to(DEVICE)
+    else:
+        model = train(model, train_loader, test_loader, epochs=EPOCHS, lr=1e-3, device=DEVICE, use_scheduler=False)
+        os.makedirs(SAVED_MODELS_DIR, exist_ok=True)
+        torch.save(model.state_dict(), save_path)
+        with open(vocab_path, "wb") as f:
+            pickle.dump(vocab, f)
+        print(f"Model saved to {save_path}")
+
     results = evaluate(model, test_loader, DEVICE)
     print(f"LSTM → Accuracy: {results['accuracy']} | F1: {results['f1']}")
     return results
