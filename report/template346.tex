@@ -1,60 +1,28 @@
 \documentclass[a4paper,12pt]{report}
 
-%
-%% PACKAGE IMPORTS
-%%  If any package needed, import it here
-%
 \usepackage{styles/ibu-thesis}
 \usepackage{subcaption}
-\usepackage{lipsum}
+\usepackage{booktabs}
 
-%
-%% MACROS
-%%  If any macro needed, define it here
-%
+\thesistitle{Text Classification in NLP: Media Bias Detection, [Student 2 Topic], and [Student 3 Topic]}
 
+\authors[1]{Atakan G\"{u}l}
+\authorsid[1]{121200152}
+\authors[2]{[Student 2 Name]}
+\authorsid[2]{[Student 2 ID]}
+\authors[3]{[Student 3 Name]}
+\authorsid[3]{[Student 3 ID]}
 
-
-%
-%% THESIS TITLE
-%
-\thesistitle{Title: \LaTeX~Template for Project}
-
-%
-%% AUTHOR INFORMATION 
-%%  If there is more than 3 author it can be added to list
-%%  e.g. \authors[4]{Name of author} and \authorsid[4]{ID of author} etc.
-%
-\authors[1]{Name Surname}
-\authorsid[1]{ID}
-\authors[2]{Name Surname}
-\authorsid[2]{ID}
-\authors[3]{Name Surname}
-\authorsid[3]{ID}
-
-%
-%% AFFILIATION INFORMATION
-%%  Below information are must
-%
 \assignment{FINAL PROJECT}
 \course{CMPE346: NATURAL LANGUAGE PROCESSING}
-\submissiondate{DATE INFORMATION}
+\submissiondate{June 2026}
 
-%
-%% ABSTRACT
-%%  In case of more than one paragraph abstracts, use \\ separator only 
-%%  to open a new paragraph
-%%  e.g. ... paragraph ended here. \\ New paragraph starts here ...
-%
-\abstract{\lipsum[1]}
-
-
+\abstract{
+This study investigates text classification across three distinct NLP tasks using a unified set of deep learning models. Each task represents a different application of classification within the NLP domain: media bias detection in news articles, [Student 2 task], and [Student 3 task]. Three models are evaluated across all tasks: a Bidirectional LSTM as a traditional deep learning baseline, and two transformer-based pretrained models, BERT and RoBERTa. Each model is fine-tuned on a task-specific dataset and evaluated using accuracy and weighted F1 score. Results consistently demonstrate the superiority of transformer-based models over the LSTM baseline, with RoBERTa achieving the highest performance across tasks.
+}
 
 \begin{document}
 
-%
-%% PRELIMINARIES 
-%
 \maketitle
 
 \addcontentsline{toc}{section}{\abstractname}
@@ -63,69 +31,136 @@
 \addcontentsline{toc}{section}{\contentsname}
 \maketableofcontents
 
-\pagenumbering{arabic} % Do not change
-\setcounter{page}{1} % Do not change
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
-%
-%% SECTIONS
-%%  The report starts here
-%
+%% ─────────────────────────────────────────────
 \section*{Introduction}
 \addcontentsline{toc}{section}{\textsc{Introduction}}
-\textit{... Introduction and related works of the selected tasks...}
+
+Text classification is one of the most fundamental tasks in Natural Language Processing, forming the backbone of a wide range of real-world applications. At its core, classification assigns a predefined label to a given piece of text based on its content, enabling automated understanding at scale. The applications span from detecting misinformation and media bias in news, to identifying argumentative intent in scientific literature, to recognizing harmful content in social media.
+
+Despite the apparent simplicity of the classification formulation, the challenge lies in capturing the semantic and contextual nuances of language. Early approaches relied on hand-crafted features and shallow models such as Naive Bayes and Support Vector Machines \cite{joachims1998}. The introduction of recurrent neural networks, particularly Long Short-Term Memory networks \cite{hochreiter1997}, marked a significant shift toward learning representations directly from sequential text data. However, the most transformative development came with the introduction of the Transformer architecture \cite{vaswani2017} and the subsequent release of large-scale pretrained language models such as BERT \cite{devlin2019} and RoBERTa \cite{liu2019}.
+
+This project explores text classification across three distinct NLP tasks, each representing a different application domain. The group collectively fine-tunes three models — Bidirectional LSTM, BERT, and RoBERTa — on individually selected datasets and reports performance using accuracy and weighted F1 score. The goal is to compare the behavior of a classic recurrent architecture against modern pretrained transformers across diverse classification challenges.
+
 \newpage
 
-\chapter{Student \#1 Name Surname}
+%% ─────────────────────────────────────────────
+\chapter{Atakan G\"{u}l --- Media Bias Detection in News}
+
 \section{Methodology}
-\textit{... The metholody used in this study ...}
+
+This study addresses the task of media bias detection in news articles, a classification problem in which the model must determine whether a given news sentence contains biased framing or is entirely factual. Detecting media bias is a non-trivial NLP challenge as bias is often expressed through subtle word choices, framing, and tone rather than explicit factual errors \cite{hamborg2019}.
+
+Three models are evaluated in this study:
+
+\textbf{Bidirectional LSTM.} Long Short-Term Memory networks are a class of recurrent neural networks designed to capture long-range dependencies in sequential data \cite{hochreiter1997}. The bidirectional variant processes the input sequence in both forward and backward directions, producing a richer contextual representation at each time step. In this study, the model uses an embedding layer followed by a two-layer Bidirectional LSTM with a hidden dimension of 256, and a linear classification head applied to the concatenation of the final forward and backward hidden states.
+
+\textbf{BERT.} Bidirectional Encoder Representations from Transformers is a pretrained language model based on the Transformer encoder architecture \cite{devlin2019}. BERT is pretrained on large corpora using masked language modeling and next sentence prediction objectives, enabling it to learn deep bidirectional contextual representations. For classification, a linear head is applied to the \texttt{[CLS]} token representation. The \texttt{bert-base-uncased} variant is used in this study.
+
+\textbf{RoBERTa.} Robustly Optimized BERT Pretraining Approach is an improved variant of BERT that removes the next sentence prediction objective, trains on significantly more data with larger batch sizes, and uses dynamic masking \cite{liu2019}. These modifications consistently yield stronger downstream performance. The \texttt{roberta-base} variant is used in this study.
+
+All transformer models are fine-tuned end-to-end using the AdamW optimizer with a linear learning rate schedule and warmup. The LSTM is trained from scratch using the Adam optimizer.
+
 \newpage
 
 \section{Experiments \& Findings}
-\textit{... The results of this study ...}
+
+\textbf{Dataset.} The BABE dataset (Bias Annotations By Experts) \cite{spinde2021} is used for this task. It consists of 4,121 news sentences collected from a diverse set of outlets, each annotated by trained experts as either biased (label 1) or non-biased (label 0). The dataset is split into 3,121 training samples and 1,000 test samples. The balanced expert annotation process makes BABE a high-quality benchmark for media bias detection.
+
+\textbf{Training Configuration.} All models are trained for a maximum of 3 epochs with early stopping applied based on validation F1 score, with a minimum improvement threshold of 0.5\% and a patience of 2 epochs. The batch size is 16 and the maximum sequence length is 128 tokens. The learning rate is $2 \times 10^{-5}$ for transformer models and $1 \times 10^{-3}$ for the LSTM. All experiments are run on an NVIDIA GeForce RTX 3060 Laptop GPU.
+
+\textbf{Results.} The performance of each model on the BABE test set is reported in Table \ref{tab:atakan_results}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Model} & \textbf{Accuracy} & \textbf{F1} \\
+        \midrule
+        LSTM      & 0.6840 & 0.6772 \\
+        BERT      & 0.8120 & 0.8122 \\
+        RoBERTa   & 0.8580 & 0.8585 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Model performance on the BABE dataset for media bias detection.}
+    \label{tab:atakan_results}
+\end{table}
+
 \newpage
 
 \section{Discussion}
-\textit{... The discussion for the results ...}
+
+The results reveal a clear performance hierarchy across the three model architectures. The Bidirectional LSTM achieves an accuracy of 68.4\% and an F1 score of 0.677, which, while above random chance, falls considerably short of the transformer-based models. This gap reflects the fundamental limitations of recurrent architectures when trained from scratch on relatively small datasets — the LSTM must learn both language representations and task-specific patterns simultaneously, with limited data to do so effectively.
+
+BERT achieves a substantial improvement with 81.2\% accuracy and 0.812 F1, demonstrating the power of transfer learning. By leveraging representations pretrained on large corpora, BERT brings rich linguistic knowledge to the fine-tuning stage, requiring far fewer labeled examples to reach strong performance.
+
+RoBERTa outperforms BERT with 85.8\% accuracy and 0.858 F1. This improvement is consistent with the findings reported in the original RoBERTa paper \cite{liu2019} and can be attributed to its more robust pretraining procedure. The removal of the next sentence prediction objective and the use of dynamic masking appear to yield representations that are better suited for downstream fine-tuning on nuanced tasks such as media bias detection, where subtle linguistic cues are critical.
+
 \newpage
 
 \section{Conclusion}
-\textit{... The conclusion of this study ...}
 
-\chapter{Student \#2 Name Surname}
+This study evaluated three deep learning models for the task of media bias detection using the BABE dataset. The results demonstrate that pretrained transformer models significantly outperform the LSTM baseline, with RoBERTa achieving the best performance at 85.8\% accuracy and 0.858 weighted F1. The findings highlight the importance of pretraining in low-resource classification scenarios, where learning from scratch is insufficient to capture the subtle linguistic patterns that characterize biased news framing. Future work could explore larger transformer variants or domain-adaptive pretraining on news corpora to push performance further.
+
+%% ─────────────────────────────────────────────
+\chapter{[Student 2 Name] --- [Student 2 Topic]}
+
 \section{Methodology}
-\textit{... The metholody used in this study ...}
+\textit{[Student 2 fills this in]}
 \newpage
 
 \section{Experiments \& Findings}
-\textit{... The results of this study ...}
+\textit{[Student 2 fills this in]}
 \newpage
 
 \section{Discussion}
-\textit{... The discussion for the results ...}
+\textit{[Student 2 fills this in]}
 \newpage
 
 \section{Conclusion}
-\textit{... The conclusion of this study ...}
+\textit{[Student 2 fills this in]}
 
+%% ─────────────────────────────────────────────
+\chapter{[Student 3 Name] --- [Student 3 Topic]}
 
-%
-%% BIBLIOGRAPHY
-%
+\section{Methodology}
+\textit{[Student 3 fills this in]}
+\newpage
+
+\section{Experiments \& Findings}
+\textit{[Student 3 fills this in]}
+\newpage
+
+\section{Discussion}
+\textit{[Student 3 fills this in]}
+\newpage
+
+\section{Conclusion}
+\textit{[Student 3 fills this in]}
+
+%% ─────────────────────────────────────────────
 \clearpage
 \bibliographystyle{ieeetr}
 \addcontentsline{toc}{section}{References}
 
-%
-%% USING .bib FILE
-%
-% \bibliography{sample}
-
-%
-%% CREATING OWN BIBLIOGRAPHY
-%
 \begin{thebibliography}{100}
-\bibitem{turing2009}{Turing, Alan M. "Computing machinery and intelligence." Parsing the Turing Test. Springer, Dordrecht, 2009. 23-65.}
-\bibitem{einstein1905} Albert Einstein. \textit{Zur Elektrodynamik bewegter K{\"o}rper}. (German) [\textit{On the electrodynamics of moving bodies}]. Annalen der Physik, 322(10):891–921, 1905.
+
+\bibitem{vaswani2017} A. Vaswani et al., ``Attention is all you need,'' \textit{Advances in Neural Information Processing Systems}, vol. 30, 2017.
+
+\bibitem{devlin2019} J. Devlin, M. Chang, K. Lee, and K. Toutanova, ``BERT: Pre-training of deep bidirectional transformers for language understanding,'' in \textit{Proc. NAACL}, 2019, pp. 4171--4186.
+
+\bibitem{liu2019} Y. Liu et al., ``RoBERTa: A robustly optimized BERT pretraining approach,'' \textit{arXiv preprint arXiv:1907.11692}, 2019.
+
+\bibitem{hochreiter1997} S. Hochreiter and J. Schmidhuber, ``Long short-term memory,'' \textit{Neural Computation}, vol. 9, no. 8, pp. 1735--1780, 1997.
+
+\bibitem{joachims1998} T. Joachims, ``Text categorization with support vector machines: Learning with many relevant features,'' in \textit{Proc. ECML}, 1998, pp. 137--142.
+
+\bibitem{hamborg2019} F. Hamborg, K. Donnay, and B. Gipp, ``Automated identification of media bias in news articles: An interdisciplinary literature review,'' \textit{International Journal on Digital Libraries}, vol. 20, pp. 391--415, 2019.
+
+\bibitem{spinde2021} T. Spinde et al., ``Neural media bias detection using distant supervision with BABE,'' in \textit{Findings of EMNLP}, 2021.
+
 \end{thebibliography}
 
 \end{document}
