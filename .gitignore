@@ -20,6 +20,16 @@ saved_models/
 !presentation/*.pdf
 !cmpe346_final_project.pdf
 
+# LaTeX artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.fls
+*.fdb_latexmk
+
 # Python
 __pycache__/
 *.pyc
