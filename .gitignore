@@ -12,7 +12,7 @@ saved_models/
 *.pkl
 *.csv
 *.json
-!results/*.json
+!**/results/results.json
 
 # Keep compiled report, presentation PDFs, and root spec
 *.pdf
