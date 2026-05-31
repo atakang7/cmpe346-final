@@ -18,7 +18,6 @@ saved_models/
 *.pdf
 !report/*.pdf
 !presentation/*.pdf
-!cmpe346_final_project.pdf
 
 # LaTeX artifacts
 *.aux
