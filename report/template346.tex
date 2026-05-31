@@ -107,6 +107,28 @@ Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scor
     \label{fig:confusion}
 \end{figure}
 
+\textbf{Qualitative Examples.} Table \ref{tab:examples} presents selected test sentences illustrating correct predictions, the transformer advantage over LSTM, and disagreements between BERT and RoBERTa.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{7.5cm}ccc}
+\toprule
+\textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT / RoBERTa} \\
+\midrule
+\textit{``Nearly 78 percent of Americans report experiencing concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark \\
+\addlinespace
+\textit{``As the Black Lives Matter movement grows, companies like Nike, Target, and Google have made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark \\
+\addlinespace
+\textit{``The case of Rahaf Mohammed al-Qunun drawn new global attention to Saudi Arabia's strict social rules...''} & NB & B\,\(\times\) & NB\,\checkmark \\
+\addlinespace
+\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & BERT: NB\,\(\times\) \quad RoBERTa: B\,\checkmark \\
+\bottomrule
+\end{tabular}
+\caption{Qualitative prediction examples. NB = Not Biased, B = Biased. \checkmark = correct, \(\times\) = incorrect.}
+\label{tab:examples}
+\end{table}
+
 \newpage
 
 \section{Discussion}

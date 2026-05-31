@@ -104,6 +104,21 @@ RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
 \end{columns}
 \end{frame}
 
+\begin{frame}{Atakan — Prediction Examples}
+\small
+\begin{tabular}{p{8cm}ccc}
+\toprule
+\textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT/RoBERTa} \\
+\midrule
+\textit{``Nearly 78\% of Americans report concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark \\[0.3cm]
+\textit{``Companies like Nike and Google made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark \\[0.3cm]
+\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & BERT: NB\,\(\times\) \newline RoBERTa: B\,\checkmark \\
+\bottomrule
+\end{tabular}
+\vspace{0.2cm}
+{\footnotesize NB = Not Biased \quad B = Biased}
+\end{frame}
+
 \begin{frame}{Atakan — Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
     \item Media bias is expressed through framing and tone — not facts

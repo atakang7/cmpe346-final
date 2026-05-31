@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  31 MAY 2026 08:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  31 MAY 2026 08:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,7 +854,12 @@ Package pdftex.def Info: ../report/figures//model_comparison.png  used on input
 (pdftex.def)             Requested size: 238.34053pt x 136.19402pt.
  [5
 
- <../report/figures//model_comparison.png>] [6
+ <../report/figures//model_comparison.png>]
+Overfull \hbox (12.5988pt too wide) in paragraph at lines 120--120
+[][] 
+ []
+
+[6
 
 ] [7
 
@@ -870,8 +875,9 @@ Package pdftex.def Info: ../report/figures//model_comparison.png  used on input
 
 ] [13
 
-]
-[14
+] [14
+
+] [15
 
 ]
 \tf@nav=\write6
@@ -888,24 +894,27 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21779 strings out of 480247
- 426648 string characters out of 5896151
+ 21804 strings out of 480247
+ 427064 string characters out of 5896151
  671267 words of memory out of 5000000
- 39237 multiletter control sequences out of 15000+600000
- 477194 words of font info for 57 fonts, out of 8000000 for 9000
+ 39257 multiletter control sequences out of 15000+600000
+ 479849 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,16n,104p,409b,728s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/zperson/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1095.6
 00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on presentation.pdf (14 pages, 125368 bytes).
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/symbols/msam10.pfb>
+Output written on presentation.pdf (15 pages, 155350 bytes).
 PDF statistics:
- 196 PDF objects out of 1000 (max. 8388607)
- 132 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
+ 218 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
