@@ -1,0 +1,131 @@
+\documentclass[a4paper,12pt]{report}
+
+%
+%% PACKAGE IMPORTS
+%%  If any package needed, import it here
+%
+\usepackage{styles/ibu-thesis}
+\usepackage{subcaption}
+\usepackage{lipsum}
+
+%
+%% MACROS
+%%  If any macro needed, define it here
+%
+
+
+
+%
+%% THESIS TITLE
+%
+\thesistitle{Title: \LaTeX~Template for Project}
+
+%
+%% AUTHOR INFORMATION 
+%%  If there is more than 3 author it can be added to list
+%%  e.g. \authors[4]{Name of author} and \authorsid[4]{ID of author} etc.
+%
+\authors[1]{Name Surname}
+\authorsid[1]{ID}
+\authors[2]{Name Surname}
+\authorsid[2]{ID}
+\authors[3]{Name Surname}
+\authorsid[3]{ID}
+
+%
+%% AFFILIATION INFORMATION
+%%  Below information are must
+%
+\assignment{FINAL PROJECT}
+\course{CMPE346: NATURAL LANGUAGE PROCESSING}
+\submissiondate{DATE INFORMATION}
+
+%
+%% ABSTRACT
+%%  In case of more than one paragraph abstracts, use \\ separator only 
+%%  to open a new paragraph
+%%  e.g. ... paragraph ended here. \\ New paragraph starts here ...
+%
+\abstract{\lipsum[1]}
+
+
+
+\begin{document}
+
+%
+%% PRELIMINARIES 
+%
+\maketitle
+
+\addcontentsline{toc}{section}{\abstractname}
+\makeabstract
+
+\addcontentsline{toc}{section}{\contentsname}
+\maketableofcontents
+
+\pagenumbering{arabic} % Do not change
+\setcounter{page}{1} % Do not change
+
+%
+%% SECTIONS
+%%  The report starts here
+%
+\section*{Introduction}
+\addcontentsline{toc}{section}{\textsc{Introduction}}
+\textit{... Introduction and related works of the selected tasks...}
+\newpage
+
+\chapter{Student \#1 Name Surname}
+\section{Methodology}
+\textit{... The metholody used in this study ...}
+\newpage
+
+\section{Experiments \& Findings}
+\textit{... The results of this study ...}
+\newpage
+
+\section{Discussion}
+\textit{... The discussion for the results ...}
+\newpage
+
+\section{Conclusion}
+\textit{... The conclusion of this study ...}
+
+\chapter{Student \#2 Name Surname}
+\section{Methodology}
+\textit{... The metholody used in this study ...}
+\newpage
+
+\section{Experiments \& Findings}
+\textit{... The results of this study ...}
+\newpage
+
+\section{Discussion}
+\textit{... The discussion for the results ...}
+\newpage
+
+\section{Conclusion}
+\textit{... The conclusion of this study ...}
+
+
+%
+%% BIBLIOGRAPHY
+%
+\clearpage
+\bibliographystyle{ieeetr}
+\addcontentsline{toc}{section}{References}
+
+%
+%% USING .bib FILE
+%
+% \bibliography{sample}
+
+%
+%% CREATING OWN BIBLIOGRAPHY
+%
+\begin{thebibliography}{100}
+\bibitem{turing2009}{Turing, Alan M. "Computing machinery and intelligence." Parsing the Turing Test. Springer, Dordrecht, 2009. 23-65.}
+\bibitem{einstein1905} Albert Einstein. \textit{Zur Elektrodynamik bewegter K{\"o}rper}. (German) [\textit{On the electrodynamics of moving bodies}]. Annalen der Physik, 322(10):891–921, 1905.
+\end{thebibliography}
+
+\end{document}

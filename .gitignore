@@ -13,6 +13,11 @@
 *.json
 !results/*.json
 
+# Keep compiled report and presentation PDFs
+*.pdf
+!report/*.pdf
+!presentation/*.pdf
+
 # Python
 __pycache__/
 *.pyc
