@@ -7,32 +7,21 @@
 \usepackage{lmodern}
 \usepackage{xcolor}
 
-% accent color — deep navy
 \definecolor{accent}{RGB}{30, 60, 120}
 \definecolor{accentlight}{RGB}{235, 240, 252}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}[frame number]
-
-% frametitle bar
 \setbeamercolor{frametitle}{fg=white, bg=accent}
 \setbeamerfont{frametitle}{size=\large, series=\bfseries}
 \setbeamertemplate{frametitle}[default][center]
-
-% title page
 \setbeamercolor{title}{fg=accent}
 \setbeamercolor{subtitle}{fg=black!60}
 \setbeamerfont{title}{size=\Large, series=\bfseries}
-
-% blocks
 \setbeamercolor{block title}{bg=accent, fg=white}
 \setbeamercolor{block body}{bg=accentlight}
 \setbeamerfont{block title}{series=\bfseries}
-
-% normal text
 \setbeamercolor{normal text}{fg=black!85}
-
-% table row separation
 \renewcommand{\arraystretch}{1.2}
 
 \graphicspath{{../report/figures/}}
@@ -50,7 +39,7 @@
 \end{frame}
 
 %% ── Slide 2: Group Overview ─────────────────────────────────
-\begin{frame}{What We Did}
+\begin{frame}{Overview}
 \textbf{Group task:} Text Classification \hfill \textbf{Metric:} Accuracy \& Weighted F1
 
 \vspace{0.5cm}
@@ -58,14 +47,14 @@
 \toprule
 \textbf{Student} & \textbf{Task} \\
 \midrule
-Atakan Gül        & Media Bias Detection in News \\
-{[Student 2]}     & {[Topic]} \\
-{[Student 3]}     & {[Topic]} \\
+Atakan Gül    & Media Bias Detection in News \\
+{[Student 2]} & {[Topic]} \\
+{[Student 3]} & {[Topic]} \\
 \bottomrule
 \end{tabular}
 \end{frame}
 
-%% ── Slide 3: Shared Models ──────────────────────────────────
+%% ── Slide 3: Models ─────────────────────────────────────────
 \begin{frame}{Models}
 \begin{block}{BiLSTM}
 Bidirectional LSTM trained from scratch. Captures sequential context in both directions.
@@ -78,6 +67,10 @@ Optimized BERT: removes next sentence prediction, uses dynamic masking and more 
 \end{block}
 \end{frame}
 
+%% ══════════════════════════════════════════════
+%% ATAKAN
+%% ══════════════════════════════════════════════
+
 %% ── Slide 4: Atakan — Task & Dataset ────────────────────────
 \begin{frame}{Atakan Gül — Media Bias Detection}
 \textbf{Task:} Classify a news sentence as \textit{biased} or \textit{not biased}.
@@ -85,14 +78,12 @@ Optimized BERT: removes next sentence prediction, uses dynamic masking and more 
 \vspace{0.4cm}
 \textbf{Dataset: BABE} (Bias Annotations By Experts)
 \begin{itemize}
-    \item 4,121 expert-annotated news sentences
-    \item Diverse outlets, binary labels
-    \item 3,121 train / 1,000 test
+    \item 4,121 expert-annotated news sentences from diverse outlets
+    \item 3,121 train / 1,000 test — binary labels
 \end{itemize}
-
 \end{frame}
 
-%% ── Slide 5: Atakan — Results ───────────────────────────────
+%% ── Slide 5: Atakan — Results & Analysis ────────────────────
 \begin{frame}{Atakan — Results}
 \begin{columns}
 \column{0.42\textwidth}
@@ -107,20 +98,43 @@ RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
 \end{tabular}
 
 \vspace{0.4cm}
-RoBERTa best. +19\% over BiLSTM.
+\begin{itemize}
+    \item RoBERTa best: +19\% over BiLSTM
+    \item BERT close behind — both benefit from pretraining
+    \item BiLSTM struggles on subtle linguistic bias
+\end{itemize}
 \column{0.58\textwidth}
 \includegraphics[width=\linewidth]{model_comparison.png}
 \end{columns}
 \end{frame}
 
-%% ── Slide 6: Student 2 ──────────────────────────────────────
-\begin{frame}{[Student 2] --- [Topic]}
+%% ── Slide 6: Atakan — Conclusion ────────────────────────────
+\begin{frame}{Atakan — Conclusion}
+\begin{itemize}
+    \item Media bias is a nuanced task — framing and tone, not facts
+    \item Pretraining is critical: transformers extract subtle linguistic patterns BiLSTM cannot
+    \item RoBERTa's optimized pretraining gives it a clear edge over BERT on this task
+\end{itemize}
+\end{frame}
+
+%% ══════════════════════════════════════════════
+%% STUDENT 2
+%% ══════════════════════════════════════════════
+
+%% ── Slide 7: Student 2 — Task & Dataset ─────────────────────
+\begin{frame}{[Student 2] — [Topic]}
 \textbf{Task:} [Description]
 
-\vspace{0.3cm}
-\textbf{Dataset:} [Name — brief stats]
+\vspace{0.4cm}
+\textbf{Dataset:} [Name]
+\begin{itemize}
+    \item [Stats]
+    \item [Train / test split]
+\end{itemize}
+\end{frame}
 
-\vspace{0.3cm}
+%% ── Slide 8: Student 2 — Results & Analysis ─────────────────
+\begin{frame}{[Student 2] — Results}
 \begin{columns}
 \column{0.42\textwidth}
 \begin{tabular}{lcc}
@@ -132,19 +146,44 @@ BERT     & — & — \\
 RoBERTa  & — & — \\
 \bottomrule
 \end{tabular}
+
+\vspace{0.4cm}
+\begin{itemize}
+    \item [Key finding 1]
+    \item [Key finding 2]
+\end{itemize}
 \column{0.58\textwidth}
-\textit{[Student 2 key finding]}
+\textit{[Figure or key observation]}
 \end{columns}
 \end{frame}
 
-%% ── Slide 7: Student 3 ──────────────────────────────────────
-\begin{frame}{[Student 3] --- [Topic]}
+%% ── Slide 9: Student 2 — Conclusion ─────────────────────────
+\begin{frame}{[Student 2] — Conclusion}
+\begin{itemize}
+    \item [Finding 1]
+    \item [Finding 2]
+    \item [Finding 3]
+\end{itemize}
+\end{frame}
+
+%% ══════════════════════════════════════════════
+%% STUDENT 3
+%% ══════════════════════════════════════════════
+
+%% ── Slide 10: Student 3 — Task & Dataset ────────────────────
+\begin{frame}{[Student 3] — [Topic]}
 \textbf{Task:} [Description]
 
-\vspace{0.3cm}
-\textbf{Dataset:} [Name — brief stats]
+\vspace{0.4cm}
+\textbf{Dataset:} [Name]
+\begin{itemize}
+    \item [Stats]
+    \item [Train / test split]
+\end{itemize}
+\end{frame}
 
-\vspace{0.3cm}
+%% ── Slide 11: Student 3 — Results & Analysis ────────────────
+\begin{frame}{[Student 3] — Results}
 \begin{columns}
 \column{0.42\textwidth}
 \begin{tabular}{lcc}
@@ -156,17 +195,61 @@ BERT     & — & — \\
 RoBERTa  & — & — \\
 \bottomrule
 \end{tabular}
+
+\vspace{0.4cm}
+\begin{itemize}
+    \item [Key finding 1]
+    \item [Key finding 2]
+\end{itemize}
 \column{0.58\textwidth}
-\textit{[Student 3 key finding]}
+\textit{[Figure or key observation]}
 \end{columns}
 \end{frame}
 
-%% ── Slide 8: Group Conclusion ───────────────────────────────
+%% ── Slide 12: Student 3 — Conclusion ────────────────────────
+\begin{frame}{[Student 3] — Conclusion}
+\begin{itemize}
+    \item [Finding 1]
+    \item [Finding 2]
+    \item [Finding 3]
+\end{itemize}
+\end{frame}
+
+%% ══════════════════════════════════════════════
+%% GROUP CONCLUSION
+%% ══════════════════════════════════════════════
+
+%% ── Slide 13: All Results ────────────────────────────────────
+\begin{frame}{All Results}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\midrule
+\multirow{3}{*}{Media Bias}
+    & BiLSTM  & 0.656 & 0.651 \\
+    & BERT    & 0.826 & 0.827 \\
+    & RoBERTa & \textbf{0.846} & \textbf{0.846} \\
+\midrule
+\multirow{3}{*}{[Student 2 Topic]}
+    & BiLSTM  & — & — \\
+    & BERT    & — & — \\
+    & RoBERTa & — & — \\
+\midrule
+\multirow{3}{*}{[Student 3 Topic]}
+    & BiLSTM  & — & — \\
+    & BERT    & — & — \\
+    & RoBERTa & — & — \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+%% ── Slide 14: Group Conclusion ───────────────────────────────
 \begin{frame}{Conclusion}
 \begin{itemize}
-    \item RoBERTa outperforms BERT and BiLSTM across all three tasks
-    \item Pretraining is decisive on small datasets
-    \item Future work: domain-adaptive pretraining, larger model variants
+    \item RoBERTa consistently outperforms across all three tasks and domains
+    \item BERT and RoBERTa both adapt well regardless of classification topic
+    \item BiLSTM fails to compete — pretraining is decisive on small labeled datasets
+    \item Transformer-based models are robust general-purpose classifiers
 \end{itemize}
 \end{frame}
 
