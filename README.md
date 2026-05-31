@@ -1,4 +1,4 @@
-# CMPE346 Final Project — Group [GROUP_ID]
+# CMPE346 Final Project — Group 2
 
 ## Group Task: Text Classification
 ## Models: LSTM, BERT (bert-base-uncased), RoBERTa (roberta-base)
