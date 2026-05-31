@@ -54,13 +54,13 @@ Atakan Gül    & Media Bias Detection \\
 %% ── Slide 3: Models
 \begin{frame}{Models}
 \begin{block}{BiLSTM}
-Bidirectional LSTM trained from scratch. Captures sequential context in both directions.
+Bidirectional recurrent network trained from scratch on each task.
 \end{block}
 \begin{block}{BERT \quad \small\normalfont\texttt{bert-base-uncased}}
-Transformer encoder pretrained via masked language modeling. Fine-tuned end-to-end.
+Transformer encoder pretrained via masked language modeling, fine-tuned end-to-end.
 \end{block}
 \begin{block}{RoBERTa \quad \small\normalfont\texttt{roberta-base}}
-Optimized BERT: removes next sentence prediction, uses dynamic masking and more data.
+Optimized BERT with dynamic masking, no NSP objective, and larger pretraining data.
 \end{block}
 \end{frame}
 
@@ -122,9 +122,8 @@ RoBERTa  & \textbf{0.8460} & \textbf{0.8464} \\
 
 \begin{frame}{Atakan — Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item Media bias is expressed through framing and tone — not facts
-    \item Pretraining is critical: transformers capture patterns BiLSTM cannot
-    \item RoBERTa outperforms BERT by ~2pp — modest but consistent with its optimized pretraining
+    \item Pretraining is critical: transformers capture subtle bias patterns BiLSTM cannot
+    \item RoBERTa is the best model — 84.60\% accuracy, 0.8464 weighted F1
 \end{itemize}
 \end{frame}
 
@@ -249,9 +248,8 @@ RoBERTa  & — & — \\
 
 \begin{frame}{Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item RoBERTa consistently outperforms across all three tasks
-    \item BERT and RoBERTa adapt well regardless of classification domain
-    \item Pretraining is decisive — BiLSTM cannot compete on small datasets
+    \item Transformer-based models outperform BiLSTM across all classification tasks
+    \item Pretraining is decisive on small labeled datasets
 \end{itemize}
 \end{frame}
 

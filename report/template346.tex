@@ -40,7 +40,7 @@ In this paper we will explore text classification on three different NLP applica
 %% ─────────────────────────────────────────────
 \section*{Introduction}
 \addcontentsline{toc}{section}{\textsc{Introduction}}
-Text classification is one of the foundational tasks in NLP and underpins many practical applications we use on a daily basis. At its most basic, text classification assigns a label from a predetermined set to an instance of text based on its contents, providing a pathway to automating understanding over large scales. These applications include, but are not limited to: finding misinformation and media bias in news; classifying the argumentative intent of scientific documents; and classifying harmful content in social media.
+Text classification is one of the foundational tasks in NLP and underpins many practical applications we use on a daily basis. At its most basic, text classification assigns a label from a predetermined set to an instance of text based on its contents, providing a pathway to automating understanding over large scales. These applications include, but are not limited to: detecting media bias and misinformation in news \cite{hamborg2019}; classifying the argumentative intent of scientific documents \cite{stab2017}; and identifying harmful content in social media \cite{schmidt2017}.
 
 While the formulation of text classification may be seemingly simple (the assignment of a discrete label to an item of text), the complexities of human language provide a variety of challenges to be addressed in text classification such as learning the semantics and contextuality of words. Early techniques relied on manually engineered features, shallow machine learning models such as Naive Bayes \cite{mccallum1998} and Support Vector Machines \cite{joachims1998}, and more recently recurrent neural networks, particularly Long Short-Term Memory networks \cite{hochreiter1997}, began learning representations directly from the text. Most impactfully however, was the introduction of the Transformer \cite{vaswani2017} and subsequently, the pre-training and subsequent release of very large scale language models such as BERT \cite{devlin2019} and RoBERTa \cite{liu2019}.
 
@@ -206,6 +206,10 @@ We built three different architectures of deep learning models for media bias de
 \bibitem{spinde2021} T. Spinde et al., ``Neural media bias detection using distant supervision with BABE -- Bias Annotations By Experts,'' in \textit{Findings of the Association for Computational Linguistics: EMNLP 2021}, 2021, pp. 1166--1177.
 
 \bibitem{huggingfaceBABE} Media Bias Group, ``BABE dataset,'' Hugging Face Datasets, 2021. [Online]. Available: \url{https://huggingface.co/datasets/mediabiasgroup/BABE}
+
+\bibitem{stab2017} C. Stab and I. Gurevych, ``Parsing argumentation structures in persuasive essays,'' \textit{Computational Linguistics}, vol. 43, no. 3, pp. 619--659, 2017.
+
+\bibitem{schmidt2017} A. Schmidt and M. Wiegand, ``A survey on hate speech detection using natural language processing,'' in \textit{Proceedings of the Fifth International Workshop on Natural Language Processing for Social Media}, 2017, pp. 1--10.
 
 \end{thebibliography}
 
