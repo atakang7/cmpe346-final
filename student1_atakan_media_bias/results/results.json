@@ -5,16 +5,33 @@
   "dataset": "mediabiasgroup/BABE",
   "results": {
     "LSTM": {
-      "accuracy": 0.684,
-      "f1": 0.6772
+      "accuracy": 0.656,
+      "f1": 0.6511
     },
     "BERT": {
-      "accuracy": 0.812,
-      "f1": 0.8122
+      "accuracy": 0.826,
+      "f1": 0.8266
     },
     "RoBERTa": {
-      "accuracy": 0.858,
-      "f1": 0.8585
+      "accuracy": 0.846,
+      "f1": 0.8464
     }
+  },
+  "loss_histories": {
+    "LSTM": [
+      0.6553,
+      0.5842,
+      0.4502
+    ],
+    "BERT": [
+      0.5332,
+      0.3386,
+      0.188
+    ],
+    "RoBERTa": [
+      0.5027,
+      0.3113,
+      0.1971
+    ]
   }
 }
