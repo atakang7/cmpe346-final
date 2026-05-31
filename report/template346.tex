@@ -139,7 +139,7 @@ It's noticeable from these numbers that there is a hierarchy of performance amon
 
 BERT has promising results, reaching 82.60\% accuracy and a weighted F1 of 0.8266, which highlights the advantages of transfer learning. As can be seen from the confusion matrix in Figure \ref{fig:confusion}, BERT was able to classify both classes more consistently, with far fewer incorrect classifications of biased sentences compared to the LSTM.
 
-The best performing model in this experiment is RoBERTa, with an accuracy of 84.60\% and a weighted F1 of 0.8464. The authors of RoBERTa attributed the improvement over BERT to a set of changes made to the BERT pre-training objective: discarding the next sentence prediction task, implementing dynamic masking of input tokens, using larger batches and more training data \cite{liu2019}. The impact of this change can be seen in the modest but consistent gains in performance over BERT, just over two percentage points for media bias detection.
+The best performing model in this experiment is RoBERTa, with an accuracy of 84.60\% and a weighted F1 of 0.8464. The authors of RoBERTa attributed the improvement over BERT to a set of changes made to the BERT pre-training objective: discarding the next sentence prediction task, implementing dynamic masking of input tokens, using larger batches and more training data \cite{liu2019}. The impact of this change can be seen in the gains over BERT: 2.00 accuracy percentage points (84.60\% vs 82.60\%) and 0.0198 weighted F1 (0.8464 vs 0.8266) on the media bias detection task.
 \newpage
 
 \section{Conclusion}

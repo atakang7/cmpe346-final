@@ -53,14 +53,12 @@ Atakan Gül    & Media Bias Detection \\
 
 %% ── Slide 3: Models
 \begin{frame}{Models}
-\begin{block}{BiLSTM}
-Bidirectional recurrent network trained from scratch on each task.
+\begin{block}{BiLSTM \textnormal{\small(baseline)}}
+Bidirectional recurrent network trained from scratch — no pretraining.
 \end{block}
-\begin{block}{BERT \quad \small\normalfont\texttt{bert-base-uncased}}
-Transformer encoder pretrained via masked language modeling, fine-tuned end-to-end.
-\end{block}
-\begin{block}{RoBERTa \quad \small\normalfont\texttt{roberta-base}}
-Optimized BERT with dynamic masking, no NSP objective, and larger pretraining data.
+\vspace{0.2cm}
+\begin{block}{BERT \texttt{\small bert-base-uncased} \quad \& \quad RoBERTa \texttt{\small roberta-base}}
+Pretrained transformer encoders fine-tuned end-to-end; RoBERTa adds dynamic masking and removes the NSP objective.
 \end{block}
 \end{frame}
 
@@ -110,8 +108,7 @@ RoBERTa  & \textbf{0.8460} & \textbf{0.8464} \\
 \toprule
 \textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT} & \textbf{RoBERTa} \\
 \midrule
-\textit{``Nearly 78\% of Americans report concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\[0.3cm]
-\textit{``Companies like Nike and Google made Juneteenth a paid holiday.''} & NB & B\,$\times$ & NB\,\checkmark & NB\,\checkmark \\[0.3cm]
+\textit{``Companies like Nike and Google made Juneteenth a paid holiday.''} & NB & B\,$\times$ & NB\,\checkmark & NB\,\checkmark \\[0.4cm]
 \textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,$\times$ & B\,\checkmark \\
 \bottomrule
 \end{tabular}%
@@ -248,8 +245,8 @@ RoBERTa  & — & — \\
 
 \begin{frame}{Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item Transformer-based models outperform BiLSTM across all classification tasks
-    \item Pretraining is decisive on small labeled datasets
+    \item Transformers consistently outperform BiLSTM — pretraining is decisive on small datasets
+    \item RoBERTa is the strongest model across all completed experiments
 \end{itemize}
 \end{frame}
 
