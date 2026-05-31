@@ -1,288 +1,212 @@
 \documentclass[aspectratio=169]{beamer}
-\usetheme{default}
-\usecolortheme{default}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
 \usefonttheme{professionalfonts}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{lmodern}
-\usepackage{xcolor}
 \usepackage{multirow}
-\usepackage{setspace}
+\usepackage{xcolor}
 
 \definecolor{accent}{RGB}{30, 60, 120}
-\definecolor{accentlight}{RGB}{235, 240, 252}
 
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
-
-% frametitle: left-aligned, generous padding
-\setbeamercolor{frametitle}{fg=white, bg=accent}
-\setbeamerfont{frametitle}{size=\large, series=\bfseries}
-\setbeamertemplate{frametitle}{
-    \vspace{0.18cm}
-    \hspace{0.3cm}\insertframetitle
-    \vspace{0.12cm}
-}
-
-% title page
-\setbeamercolor{title}{fg=accent}
-\setbeamercolor{subtitle}{fg=black!55}
-\setbeamercolor{author}{fg=black!70}
-\setbeamercolor{date}{fg=black!50}
-\setbeamerfont{title}{size=\LARGE, series=\bfseries}
-\setbeamerfont{subtitle}{size=\normalsize}
-
-% blocks — compact, no extra padding
-\setbeamercolor{block title}{bg=accent, fg=white}
-\setbeamercolor{block body}{bg=accentlight}
-\setbeamerfont{block title}{size=\small, series=\bfseries}
-\setbeamerfont{block body}{size=\small}
-\setbeamertemplate{blocks}[rounded][shadow=false]
-
-% body text
-\setbeamercolor{normal text}{fg=black!85}
-\setbeamerfont{itemize/enumerate body}{size=\small}
-
-% tight itemize
-\setbeamertemplate{itemize item}{\scriptsize\raise1.5pt\hbox{\textbullet}}
-\setlength{\leftmargini}{1em}
-
-% table spacing
-\renewcommand{\arraystretch}{1.25}
+\setbeamercolor{palette primary}{bg=accent, fg=white}
+\setbeamercolor{palette secondary}{bg=accent!80, fg=white}
+\setbeamercolor{palette tertiary}{bg=accent!60, fg=white}
+\setbeamercolor{frametitle}{bg=accent, fg=white}
+\renewcommand{\arraystretch}{1.3}
 
 \graphicspath{{../report/figures/}}
 
 \title{Text Classification in NLP}
-\subtitle{CMPE346 \quad\textbf{·}\quad Group 2}
-\author{Atakan Gül \quad\textbf{·}\quad [Student 2] \quad\textbf{·}\quad [Student 3]}
+\subtitle{CMPE346 · Group 2}
+\author{Atakan Gül \and [Student 2] \and [Student 3]}
 \date{June 5, 2026}
 
 \begin{document}
 
-%% ── Slide 1: Title ──────────────────────────────────────────
-\begin{frame}[plain]
-\vspace{1.8cm}
-\begin{center}
-    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
-    \vspace{0.3cm}
-    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
-    \vspace{0.6cm}
-    \textcolor{black!50}{\rule{0.4\textwidth}{0.4pt}}
-    \vspace{0.4cm}
-    {\small\usebeamercolor[fg]{author}\insertauthor\par}
-    \vspace{0.2cm}
-    {\footnotesize\usebeamercolor[fg]{date}\insertdate\par}
-\end{center}
+%% ── Slide 1: Title
+\begin{frame}
+\titlepage
 \end{frame}
 
-%% ── Slide 2: Overview ───────────────────────────────────────
+%% ── Slide 2: Overview
 \begin{frame}{Overview}
-\vspace{0.2cm}
 \begin{columns}[t]
 \column{0.35\textwidth}
-    {\small\textbf{Group task}}\par
-    \vspace{0.15cm}
-    {\small Text Classification}\par
-    \vspace{0.4cm}
-    {\small\textbf{Metric}}\par
-    \vspace{0.15cm}
-    {\small Accuracy \& Weighted F1}
+\textbf{Group task}\\[0.3cm]
+Text Classification\\[0.5cm]
+\textbf{Metric}\\[0.3cm]
+Accuracy \& Weighted F1
 \column{0.65\textwidth}
-    \begin{tabular}{ll}
-    \toprule
-    \textbf{Student} & \textbf{Task} \\
-    \midrule
-    Atakan Gül    & Media Bias Detection \\
-    {[Student 2]} & {[Topic]} \\
-    {[Student 3]} & {[Topic]} \\
-    \bottomrule
-    \end{tabular}
+\begin{tabular}{ll}
+\toprule
+\textbf{Student} & \textbf{Task} \\
+\midrule
+Atakan Gül    & Media Bias Detection \\
+{[Student 2]} & {[Topic]} \\
+{[Student 3]} & {[Topic]} \\
+\bottomrule
+\end{tabular}
 \end{columns}
 \end{frame}
 
-%% ── Slide 3: Models ─────────────────────────────────────────
+%% ── Slide 3: Models
 \begin{frame}{Models}
-\vspace{0.1cm}
 \begin{block}{BiLSTM}
 Bidirectional LSTM trained from scratch. Captures sequential context in both directions.
 \end{block}
-\vspace{0.15cm}
-\begin{block}{BERT \normalfont\footnotesize\texttt{bert-base-uncased}}
+\begin{block}{BERT \quad \small\normalfont\texttt{bert-base-uncased}}
 Transformer encoder pretrained via masked language modeling. Fine-tuned end-to-end.
 \end{block}
-\vspace{0.15cm}
-\begin{block}{RoBERTa \normalfont\footnotesize\texttt{roberta-base}}
+\begin{block}{RoBERTa \quad \small\normalfont\texttt{roberta-base}}
 Optimized BERT: removes next sentence prediction, uses dynamic masking and more data.
 \end{block}
 \end{frame}
 
-%% ══════════════════════════════════════════════
-%% ATAKAN
-%% ══════════════════════════════════════════════
+%% ══ ATAKAN ══════════════════════════════════
 
 \begin{frame}{Atakan Gül — Media Bias Detection}
-\vspace{0.2cm}
 \begin{columns}[t]
-\column{0.48\textwidth}
-    {\small\textbf{Task}}\par
-    \vspace{0.1cm}
-    {\small Classify a news sentence as \textit{biased} or \textit{not biased}.}\par
-\column{0.52\textwidth}
-    {\small\textbf{Dataset: BABE}}\par
-    \vspace{0.1cm}
-    \begin{itemize}\small
-        \item 4,121 expert-annotated sentences
-        \item Diverse news outlets
-        \item 3,121 train \textbf{/} 1,000 test
-    \end{itemize}
+\column{0.5\textwidth}
+\textbf{Task}\\[0.2cm]
+Classify a news sentence as \textit{biased} or \textit{not biased}.
+\column{0.5\textwidth}
+\textbf{Dataset: BABE}\\[0.2cm]
+\begin{itemize}
+    \item 4,121 expert-annotated sentences
+    \item Diverse news outlets
+    \item 3,121 train / 1,000 test
+\end{itemize}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Atakan — Results}
-\vspace{0.1cm}
 \begin{columns}[c]
-\column{0.44\textwidth}
-    \begin{tabular}{lcc}
-    \toprule
-    \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
-    \midrule
-    BiLSTM   & 0.656 & 0.651 \\
-    BERT     & 0.826 & 0.827 \\
-    RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
-    \bottomrule
-    \end{tabular}
-    \vspace{0.35cm}
-    \begin{itemize}\small
-        \item RoBERTa best: +19\% over BiLSTM
-        \item BERT close behind
-        \item BiLSTM struggles on subtle bias
-    \end{itemize}
-\column{0.56\textwidth}
-    \includegraphics[width=\linewidth]{model_comparison.png}
+\column{0.45\textwidth}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\midrule
+BiLSTM   & 0.656 & 0.651 \\
+BERT     & 0.826 & 0.827 \\
+RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
+\bottomrule
+\end{tabular}
+\vspace{0.3cm}
+\begin{itemize}
+    \item RoBERTa best: +19\% over BiLSTM
+    \item BERT close behind
+    \item BiLSTM struggles on subtle bias
+\end{itemize}
+\column{0.55\textwidth}
+\includegraphics[width=\linewidth]{model_comparison.png}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Atakan — Conclusion}
-\vspace{0.5cm}
-\begin{itemize}\setlength\itemsep{0.4cm}
+\begin{itemize}\setlength\itemsep{0.5cm}
     \item Media bias is expressed through framing and tone — not facts
     \item Pretraining is critical: transformers capture patterns BiLSTM cannot
     \item RoBERTa's optimized pretraining gives it a clear edge over BERT
 \end{itemize}
 \end{frame}
 
-%% ══════════════════════════════════════════════
-%% STUDENT 2
-%% ══════════════════════════════════════════════
+%% ══ STUDENT 2 ════════════════════════════════
 
 \begin{frame}{[Student 2] — [Topic]}
-\vspace{0.2cm}
 \begin{columns}[t]
-\column{0.48\textwidth}
-    {\small\textbf{Task}}\par
-    \vspace{0.1cm}
-    {\small [Description]}\par
-\column{0.52\textwidth}
-    {\small\textbf{Dataset: [Name]}}\par
-    \vspace{0.1cm}
-    \begin{itemize}\small
-        \item [Stats]
-        \item [Train / test split]
-    \end{itemize}
+\column{0.5\textwidth}
+\textbf{Task}\\[0.2cm]
+[Description]
+\column{0.5\textwidth}
+\textbf{Dataset: [Name]}\\[0.2cm]
+\begin{itemize}
+    \item [Stats]
+    \item [Train / test split]
+\end{itemize}
 \end{columns}
 \end{frame}
 
 \begin{frame}{[Student 2] — Results}
-\vspace{0.1cm}
 \begin{columns}[c]
-\column{0.44\textwidth}
-    \begin{tabular}{lcc}
-    \toprule
-    \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
-    \midrule
-    BiLSTM   & — & — \\
-    BERT     & — & — \\
-    RoBERTa  & — & — \\
-    \bottomrule
-    \end{tabular}
-    \vspace{0.35cm}
-    \begin{itemize}\small
-        \item [Key finding 1]
-        \item [Key finding 2]
-    \end{itemize}
-\column{0.56\textwidth}
-    \textit{[Figure]}
+\column{0.45\textwidth}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\midrule
+BiLSTM   & — & — \\
+BERT     & — & — \\
+RoBERTa  & — & — \\
+\bottomrule
+\end{tabular}
+\vspace{0.3cm}
+\begin{itemize}
+    \item [Key finding 1]
+    \item [Key finding 2]
+\end{itemize}
+\column{0.55\textwidth}
+\textit{[Figure]}
 \end{columns}
 \end{frame}
 
 \begin{frame}{[Student 2] — Conclusion}
-\vspace{0.5cm}
-\begin{itemize}\setlength\itemsep{0.4cm}
+\begin{itemize}\setlength\itemsep{0.5cm}
     \item [Finding 1]
     \item [Finding 2]
     \item [Finding 3]
 \end{itemize}
 \end{frame}
 
-%% ══════════════════════════════════════════════
-%% STUDENT 3
-%% ══════════════════════════════════════════════
+%% ══ STUDENT 3 ════════════════════════════════
 
 \begin{frame}{[Student 3] — [Topic]}
-\vspace{0.2cm}
 \begin{columns}[t]
-\column{0.48\textwidth}
-    {\small\textbf{Task}}\par
-    \vspace{0.1cm}
-    {\small [Description]}\par
-\column{0.52\textwidth}
-    {\small\textbf{Dataset: [Name]}}\par
-    \vspace{0.1cm}
-    \begin{itemize}\small
-        \item [Stats]
-        \item [Train / test split]
-    \end{itemize}
+\column{0.5\textwidth}
+\textbf{Task}\\[0.2cm]
+[Description]
+\column{0.5\textwidth}
+\textbf{Dataset: [Name]}\\[0.2cm]
+\begin{itemize}
+    \item [Stats]
+    \item [Train / test split]
+\end{itemize}
 \end{columns}
 \end{frame}
 
 \begin{frame}{[Student 3] — Results}
-\vspace{0.1cm}
 \begin{columns}[c]
-\column{0.44\textwidth}
-    \begin{tabular}{lcc}
-    \toprule
-    \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
-    \midrule
-    BiLSTM   & — & — \\
-    BERT     & — & — \\
-    RoBERTa  & — & — \\
-    \bottomrule
-    \end{tabular}
-    \vspace{0.35cm}
-    \begin{itemize}\small
-        \item [Key finding 1]
-        \item [Key finding 2]
-    \end{itemize}
-\column{0.56\textwidth}
-    \textit{[Figure]}
+\column{0.45\textwidth}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\midrule
+BiLSTM   & — & — \\
+BERT     & — & — \\
+RoBERTa  & — & — \\
+\bottomrule
+\end{tabular}
+\vspace{0.3cm}
+\begin{itemize}
+    \item [Key finding 1]
+    \item [Key finding 2]
+\end{itemize}
+\column{0.55\textwidth}
+\textit{[Figure]}
 \end{columns}
 \end{frame}
 
 \begin{frame}{[Student 3] — Conclusion}
-\vspace{0.5cm}
-\begin{itemize}\setlength\itemsep{0.4cm}
+\begin{itemize}\setlength\itemsep{0.5cm}
     \item [Finding 1]
     \item [Finding 2]
     \item [Finding 3]
 \end{itemize}
 \end{frame}
 
-%% ══════════════════════════════════════════════
-%% GROUP CONCLUSION
-%% ══════════════════════════════════════════════
+%% ══ GROUP CONCLUSION ═════════════════════════
 
 \begin{frame}{All Results}
-\vspace{0.2cm}
 \begin{center}
 \begin{tabular}{llcc}
 \toprule
@@ -308,8 +232,7 @@ Optimized BERT: removes next sentence prediction, uses dynamic masking and more 
 \end{frame}
 
 \begin{frame}{Conclusion}
-\vspace{0.5cm}
-\begin{itemize}\setlength\itemsep{0.4cm}
+\begin{itemize}\setlength\itemsep{0.5cm}
     \item RoBERTa consistently outperforms across all three tasks
     \item BERT and RoBERTa adapt well regardless of classification domain
     \item Pretraining is decisive — BiLSTM cannot compete on small datasets
