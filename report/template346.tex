@@ -57,7 +57,7 @@ In this work, 3 models are tested:
 
 \textbf{BERT.} BERT is a pre-trained language model based on the Transformer encoder architecture. It is trained on a large corpus using a masked language modeling objective and a next sentence prediction objective and therefore is able to produce deep bidirectional context representations \cite{devlin2019}. We feed the \texttt{[CLS]} token output through a linear classifier. For the implementation of BERT we use the \texttt{bert-base-uncased} variant.
 
-\textbf{RoBERTa.} The Robustly Optimized BERT Pretraining Approach (RoBERTa) is a variant of BERT in which the next sentence prediction task was removed, trained on a larger corpus using larger batch size and uses dynamic masking \cite{liu2019}. This architecture has been shown to perform consistently better on downstream tasks. For RoBERTa we use the \texttt{roberta-base} variant.
+\textbf{RoBERTa.} RoBERTa is a BERT variant that removes next sentence prediction, uses dynamic masking, and is trained with larger corpora and batch sizes \cite{liu2019}. This architecture has been shown to perform consistently better on downstream tasks. For RoBERTa we use the \texttt{roberta-base} variant.
 
 The transformer models (BERT and RoBERTa) are fine-tuned from the beginning with an AdamW optimizer and a linear learning rate scheduler with warmup. The LSTM model is trained from scratch using the Adam optimizer.
 
@@ -86,21 +86,21 @@ The transformer models (BERT and RoBERTa) are fine-tuned from the beginning with
 
 Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scores across all three models. Figure \ref{fig:loss} shows the training loss per epoch for each model. Figure \ref{fig:confusion} presents the confusion matrices on the test set.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\linewidth]{figures/model_comparison.png}
     \caption{Accuracy and F1 score comparison across LSTM, BERT, and RoBERTa.}
     \label{fig:comparison}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\linewidth]{figures/training_curves.png}
     \caption{Training loss per epoch for each model.}
     \label{fig:loss}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{figures/confusion_matrices.png}
     \caption{Confusion matrices on the BABE test set for each model.}
@@ -121,7 +121,7 @@ RoBERTa achieves 84.6\% accuracy and 0.846 F1 score. The RoBERTa paper attribute
 
 \section{Conclusion}
 
-In this paper three different DL architectures were implemented for media bias detection over BABE dataset. The experimental results showed that the pretrained transformers gave significantly better performances than the LSTM baseline and the best among them was RoBERTa with 85.8% accuracy and 0.858 weighted F1-score. The experiments also showed that pretraining plays an important role for low-resource classification task and it is impossible to learn language nuances for news framing and bias without pretraining. Future works can be done using bigger transformers and pretraining on news corpora by domain adaptation.
+In this paper, three different deep learning architectures were implemented for media bias detection on the BABE dataset. The experimental results showed that the pretrained transformers performed significantly better than the LSTM baseline, and the best model was RoBERTa with 84.6\% accuracy and 0.846 weighted F1-score. The experiments also showed that pretraining plays an important role for low-resource classification tasks, where learning the language nuances of news framing and bias from scratch is difficult. Future work can use larger transformer models or domain-adaptive pretraining on news corpora.
 
 %% ─────────────────────────────────────────────
 \chapter{[Student 2 Name] --- [Student 2 Topic]}
@@ -181,6 +181,8 @@ In this paper three different DL architectures were implemented for media bias d
 \bibitem{hamborg2019} F. Hamborg, K. Donnay, and B. Gipp, ``Automated identification of media bias in news articles: An interdisciplinary literature review,'' \textit{International Journal on Digital Libraries}, vol. 20, pp. 391--415, 2019.
 
 \bibitem{spinde2021} T. Spinde et al., ``Neural media bias detection using distant supervision with BABE -- Bias Annotations By Experts,'' in \textit{Findings of the Association for Computational Linguistics: EMNLP 2021}, 2021, pp. 1166--1177.
+
+\bibitem{huggingfaceBABE} Media Bias Group, ``BABE dataset,'' Hugging Face Datasets, 2021. [Online]. Available: https://huggingface.co/datasets/mediabiasgroup/BABE
 
 \bibitem{huggingfaceBABE} Media Bias Group, ``BABE,'' Hugging Face Datasets. [Online]. Available: \url{https://huggingface.co/datasets/mediabiasgroup/BABE}
 

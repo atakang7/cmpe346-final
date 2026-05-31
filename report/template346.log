@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  31 MAY 2026 08:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  31 MAY 2026 08:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -577,60 +577,27 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [3] [1]
 Chapter 1.
-
-Overfull \hbox (32.2446pt too wide) in paragraph at lines 60--61
-[]\OT1/cmr/bx/n/12 RoBERTa. \OT1/cmr/m/n/12 The Ro-bustly Op-ti-mized BERT Pre-
-train-ing Ap-proach (RoBERTa)
- []
-
 [2
 
 ] [3]
-
-LaTeX Warning: Reference `fig:comparison' on page 4 undefined on input line 87.
-
-
-
-LaTeX Warning: Reference `fig:loss' on page 4 undefined on input line 87.
-
-
-LaTeX Warning: Reference `fig:confusion' on page 4 undefined on input line 87.
-
-<figures/model_comparison.png, id=153, 505.89pt x 289.08pt>
+<figures/model_comparison.png, id=156, 505.89pt x 289.08pt>
 File: figures/model_comparison.png Graphic file (type png)
 <use figures/model_comparison.png>
 Package pdftex.def Info: figures/model_comparison.png  used on input line 91.
 (pdftex.def)             Requested size: 331.50238pt x 189.43478pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/training_curves.png, id=154, 505.89pt x 289.08pt>
+<figures/training_curves.png, id=157, 505.89pt x 289.08pt>
 File: figures/training_curves.png Graphic file (type png)
 <use figures/training_curves.png>
 Package pdftex.def Info: figures/training_curves.png  used on input line 98.
 (pdftex.def)             Requested size: 331.50238pt x 189.43478pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/confusion_matrices.png, id=155, 992.508pt x 297.2706pt>
+<figures/confusion_matrices.png, id=158, 992.508pt x 297.2706pt>
 File: figures/confusion_matrices.png Graphic file (type png)
 <use figures/confusion_matrices.png>
 Package pdftex.def Info: figures/confusion_matrices.png  used on input line 105
 .
 (pdftex.def)             Requested size: 390.0pt x 116.8105pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4]
-
-LaTeX Warning: Reference `fig:confusion' on page 5 undefined on input line 116.
-
-
-
-LaTeX Warning: Reference `fig:loss' on page 5 undefined on input line 118.
-
-[5 <./figures/model_comparison.png>] [6 <./figures/training_curves.png> <./figu
-res/confusion_matrices.png>]
+ [4] [5 <./figures/model_comparison.png>] [6 <./figures/training_curves.png> <.
+/figures/confusion_matrices.png>]
 Chapter 2.
 [7
 
@@ -638,13 +605,25 @@ Chapter 2.
 Chapter 3.
 [11
 
-] [12] [13] [14] [15
+] [12] [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
+[]\OT1/cmr/m/n/12 Media Bias Group, ``BABE dataset,'' Hug-
+ []
 
 
-] (./template346.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
+\OT1/cmr/m/n/12 ging Face Datasets, 2021. [On-line]. Avail-able:
+ []
 
-LaTeX Warning: There were undefined references.
+[15
 
+
+] [16pdfTeX warning (ext4): destination with the same identifier (name{cite.hug
+gingfaceBABE}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.191 \end{document}
+                    ] (./template346.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -652,13 +631,13 @@ Package rerunfilecheck Info: File `template346.out' has not changed.
 (rerunfilecheck)             Checksum: CC1E22628FD1EB95E22C0DC1F8A75024;2682.
  ) 
 Here is how much of TeX's memory you used:
- 19079 strings out of 480247
- 334423 string characters out of 5896151
- 633431 words of memory out of 5000000
+ 19080 strings out of 480247
+ 334430 string characters out of 5896151
+ 633689 words of memory out of 5000000
  36693 multiletter control sequences out of 15000+600000
  478151 words of font info for 60 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 125i,9n,131p,911b,366s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 125i,9n,131p,911b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/t
@@ -670,10 +649,10 @@ s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
 c/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt12.pfb>
-Output written on template346.pdf (18 pages, 300083 bytes).
+Output written on template346.pdf (19 pages, 300717 bytes).
 PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 240 compressed objects within 3 object streams
+ 51 named destinations out of 1000 (max. 500000)
  173 words of extra memory for PDF output out of 10000 (max. 10000000)
 
