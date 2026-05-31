@@ -18,7 +18,7 @@
 \submissiondate{June 2026}
 
 \abstract{
-This study investigates text classification across three distinct NLP tasks using a unified set of deep learning models. Each task represents a different application of classification within the NLP domain: media bias detection in news articles, [Student 2 task], and [Student 3 task]. Three models are evaluated across all tasks: a Bidirectional LSTM as a traditional deep learning baseline, and two transformer-based pretrained models, BERT and RoBERTa. Each model is fine-tuned on a task-specific dataset and evaluated using accuracy and weighted F1 score. Results consistently demonstrate the superiority of transformer-based models over the LSTM baseline, with RoBERTa achieving the highest performance across tasks.
+In this paper, we performed text classification on three different NLP tasks using an identical deep learning model. Each task is an application of classification in the NLP field: Media bias detection of news articles, [Student 2 task], and [Student 3 task]. Three models are applied to each task, including one traditional deep learning model Bidirectional LSTM, and two transformer-based pre-trained models BERT and RoBERTa. The three models are then fine-tuned on the dataset for each specific task, and accuracy and weighted F1-score are used as evaluation metrics. For all three tasks, we confirmed that transformer-based models outperform Bidirectional LSTM, and RoBERTa attains the best results.
 }
 
 \begin{document}
@@ -37,13 +37,11 @@ This study investigates text classification across three distinct NLP tasks usin
 %% ─────────────────────────────────────────────
 \section*{Introduction}
 \addcontentsline{toc}{section}{\textsc{Introduction}}
+Text classification is one of the foundational tasks in NLP and underpins many practical applications we use on a daily basis. At its most basic, text classification assigns a label from a predetermined set to an instance of text based on its contents, providing a pathway to automating understanding over large scales. These applications include, but are not limited to: finding misinformation and media bias in news; classifying the argumentative intent of scientific documents; and classifying harmful content in social media.
 
-Text classification is one of the most fundamental tasks in Natural Language Processing, forming the backbone of a wide range of real-world applications. At its core, classification assigns a predefined label to a given piece of text based on its content, enabling automated understanding at scale. The applications span from detecting misinformation and media bias in news, to identifying argumentative intent in scientific literature, to recognizing harmful content in social media.
+While the formulation of text classification may be seemingly simple (the assignment of a discrete label to an item of text), the complexities of human language provide a variety of challenges to be addressed in text classification such as learning the semantics and contextuality of words. Early techniques relied on manually engineered features, shallow machine learning models such as Naive Bayes and Support Vector Machines \cite{joachims1998}, and more recently recurrent neural networks, particularly Long Short-Term Memory networks \cite{hochreiter1997}, began learning representations directly from the text. Most impactfully however, was the introduction of the Transformer \cite{vaswani2017} and subsequently, the pre-training and subsequent release of very large scale language models such as BERT \cite{devlin2019} and RoBERTa \cite{liu2019}.
 
-Despite the apparent simplicity of the classification formulation, the challenge lies in capturing the semantic and contextual nuances of language. Early approaches relied on hand-crafted features and shallow models such as Naive Bayes and Support Vector Machines \cite{joachims1998}. The introduction of recurrent neural networks, particularly Long Short-Term Memory networks \cite{hochreiter1997}, marked a significant shift toward learning representations directly from sequential text data. However, the most transformative development came with the introduction of the Transformer architecture \cite{vaswani2017} and the subsequent release of large-scale pretrained language models such as BERT \cite{devlin2019} and RoBERTa \cite{liu2019}.
-
-This project explores text classification across three distinct NLP tasks, each representing a different application domain. The group collectively fine-tunes three models — Bidirectional LSTM, BERT, and RoBERTa — on individually selected datasets and reports performance using accuracy and weighted F1 score. The goal is to compare the behavior of a classic recurrent architecture against modern pretrained transformers across diverse classification challenges.
-
+This project looks at text classification in three different NLP tasks each corresponding to a different area of application. The group then proceeds to individually train three different models (BiLSTM, BERT, RoBERTa) on three individually chosen datasets and reports their performance in terms of accuracy and weighted F1-score. The intention of this is to compare how the three models behave under different circumstances.
 \newpage
 
 %% ─────────────────────────────────────────────
@@ -51,28 +49,26 @@ This project explores text classification across three distinct NLP tasks, each 
 
 \section{Methodology}
 
-This study addresses the task of media bias detection in news articles, a classification problem in which the model must determine whether a given news sentence contains biased framing or is entirely factual. Detecting media bias is a non-trivial NLP challenge as bias is often expressed through subtle word choices, framing, and tone rather than explicit factual errors \cite{hamborg2019}.
+This work targets the task of media bias detection from news articles. It is a classification task where the model has to decide whether a news sentence has biased framing or no bias. Media bias detection is a non-trivial NLP problem because bias is manifested by subtler things like phrasing, framing and tone, and not by stating false facts \cite{hamborg2019}.
 
-Three models are evaluated in this study:
+In this work, 3 models are tested:
 
-\textbf{Bidirectional LSTM.} Long Short-Term Memory networks are a class of recurrent neural networks designed to capture long-range dependencies in sequential data \cite{hochreiter1997}. The bidirectional variant processes the input sequence in both forward and backward directions, producing a richer contextual representation at each time step. In this study, the model uses an embedding layer followed by a two-layer Bidirectional LSTM with a hidden dimension of 256, and a linear classification head applied to the concatenation of the final forward and backward hidden states.
+\textbf{Bidirectional LSTM.} A Long Short-Term Memory network is a type of recurrent neural network designed to remember information for long periods of time \cite{hochreiter1997}. Bidirectional LSTMs are trained in both directions in order to make better use of the context. In our work the model takes an embedding layer, two layers of 256-hidden-dimension Bidirectional LSTMs and a linear classification layer on top of the concatenation of the last forward and backward hidden states.
 
-\textbf{BERT.} Bidirectional Encoder Representations from Transformers is a pretrained language model based on the Transformer encoder architecture \cite{devlin2019}. BERT is pretrained on large corpora using masked language modeling and next sentence prediction objectives, enabling it to learn deep bidirectional contextual representations. For classification, a linear head is applied to the \texttt{[CLS]} token representation. The \texttt{bert-base-uncased} variant is used in this study.
+\textbf{BERT.} BERT is a pre-trained language model based on the Transformer encoder architecture. It is trained on a large corpus using a masked language modeling objective and a next sentence prediction objective and therefore is able to produce deep bidirectional context representations \cite{devlin2019}. We feed the \texttt{[CLS]} token output through a linear classifier. For the implementation of BERT we use the \texttt{bert-base-uncased} variant.
 
-\textbf{RoBERTa.} Robustly Optimized BERT Pretraining Approach is an improved variant of BERT that removes the next sentence prediction objective, trains on significantly more data with larger batch sizes, and uses dynamic masking \cite{liu2019}. These modifications consistently yield stronger downstream performance. The \texttt{roberta-base} variant is used in this study.
+\textbf{RoBERTa.} The Robustly Optimized BERT Pretraining Approach (RoBERTa) is a variant of BERT in which the next sentence prediction task was removed, trained on a larger corpus using larger batch size and uses dynamic masking \cite{liu2019}. This architecture has been shown to perform consistently better on downstream tasks. For RoBERTa we use the \texttt{roberta-base} variant.
 
-All transformer models are fine-tuned end-to-end using the AdamW optimizer with a linear learning rate schedule and warmup. The LSTM is trained from scratch using the Adam optimizer.
+The transformer models (BERT and RoBERTa) are fine-tuned from the beginning with an AdamW optimizer and a linear learning rate scheduler with warmup. The LSTM model is trained from scratch using the Adam optimizer.
 
 \newpage
 
 \section{Experiments \& Findings}
+\textbf{Dataset.} The BABE dataset (Bias Annotations By Experts) \cite{spinde2021} is employed for this task. It is composed of 4,121 news sentences gathered from a diverse collection of sources, each rated as either biased (1) or not biased (0) by trained annotators. It is divided into 3,121 training and 1,000 test samples. Since the labeling is conducted with the help of expert annotators and has been designed carefully, it serves as a reliable reference for media bias detection.
 
-\textbf{Dataset.} The BABE dataset (Bias Annotations By Experts) \cite{spinde2021} is used for this task. It consists of 4,121 news sentences collected from a diverse set of outlets, each annotated by trained experts as either biased (label 1) or non-biased (label 0). The dataset is split into 3,121 training samples and 1,000 test samples. The balanced expert annotation process makes BABE a high-quality benchmark for media bias detection.
+\textbf{Training Configuration.} For all models, 3 epochs of training are performed with early stopping on F1 score on the validation set, a stopping threshold of 0.5\% difference between consecutive performances and a patience of 2 epochs. A batch size of 16 and a maximum sequence length of 128 are set. The learning rate for transformers is $2 \times 10^{-5}$ and for the LSTM is $1 \times 10^{-3}$. All models are trained on an NVIDIA GeForce RTX 3060 Laptop GPU.
 
-\textbf{Training Configuration.} All models are trained for a maximum of 3 epochs with early stopping applied based on validation F1 score, with a minimum improvement threshold of 0.5\% and a patience of 2 epochs. The batch size is 16 and the maximum sequence length is 128 tokens. The learning rate is $2 \times 10^{-5}$ for transformer models and $1 \times 10^{-3}$ for the LSTM. All experiments are run on an NVIDIA GeForce RTX 3060 Laptop GPU.
-
-\textbf{Results.} The performance of each model on the BABE test set is reported in Table \ref{tab:atakan_results}.
-
+\textbf{Results.} Table \ref{tab:atakan_results} presents the performance of each model on the BABE test set.
 \begin{table}[h]
     \centering
     \begin{tabular}{lcc}
@@ -92,17 +88,17 @@ All transformer models are fine-tuned end-to-end using the AdamW optimizer with 
 
 \section{Discussion}
 
-The results reveal a clear performance hierarchy across the three model architectures. The Bidirectional LSTM achieves an accuracy of 68.4\% and an F1 score of 0.677, which, while above random chance, falls considerably short of the transformer-based models. This gap reflects the fundamental limitations of recurrent architectures when trained from scratch on relatively small datasets — the LSTM must learn both language representations and task-specific patterns simultaneously, with limited data to do so effectively.
+From these figures, it is clear that there is a performance hierarchy across the three architectures: The Bidirectional LSTM gets 68.4% accuracy and an F1 score of 0.677 which although greater than random are nowhere near the performances of the transformer architectures. This difference shows the difficulty for a recurrent architecture, pre-trained from scratch, to learn both linguistic features and the relevant task-specific patterns from an relatively small amount of data.
 
-BERT achieves a substantial improvement with 81.2\% accuracy and 0.812 F1, demonstrating the power of transfer learning. By leveraging representations pretrained on large corpora, BERT brings rich linguistic knowledge to the fine-tuning stage, requiring far fewer labeled examples to reach strong performance.
+BERT scores well, gaining 81.2% accuracy and an F1 score of 0.812 showing the success of transfer learning, where the pre-trained models contain deep representations of language learned on a huge corpus of text that have only to be refined and adapted on the smaller, labeled data set.
 
-RoBERTa outperforms BERT with 85.8\% accuracy and 0.858 F1. This improvement is consistent with the findings reported in the original RoBERTa paper \cite{liu2019} and can be attributed to its more robust pretraining procedure. The removal of the next sentence prediction objective and the use of dynamic masking appear to yield representations that are better suited for downstream fine-tuning on nuanced tasks such as media bias detection, where subtle linguistic cues are critical.
+RoBERTa scores an excellent 85.8% accuracy and 0.858 F1 score. This result is comparable with those shown in the RoBERTa paper \cite{liu2019} and could be seen as proof that the improvements to the pre-training procedure: the removal of the next sentence prediction, the addition of dynamic masking and generally greater attention paid to the masking scheme, results in better-tuned and consequently better-performing representations on downstream, fine-tuning tasks.
 
 \newpage
 
 \section{Conclusion}
 
-This study evaluated three deep learning models for the task of media bias detection using the BABE dataset. The results demonstrate that pretrained transformer models significantly outperform the LSTM baseline, with RoBERTa achieving the best performance at 85.8\% accuracy and 0.858 weighted F1. The findings highlight the importance of pretraining in low-resource classification scenarios, where learning from scratch is insufficient to capture the subtle linguistic patterns that characterize biased news framing. Future work could explore larger transformer variants or domain-adaptive pretraining on news corpora to push performance further.
+This paper applied three deep learning architectures to detect media bias using the BABE dataset. Experiments indicated that the pretrained transformers substantially outperformed the LSTM baseline, and RoBERTa produced the best results with accuracy 85.8\% and weighted F1 0.858. The experimental results also indicate the crucial role of pretraining for low-resource classification problems since it is not possible to learn the nuances of language for news framing and bias without pretraining. Further investigations could use larger transformer models or domain adaptation pretraining on news corpora.
 
 %% ─────────────────────────────────────────────
 \chapter{[Student 2 Name] --- [Student 2 Topic]}
