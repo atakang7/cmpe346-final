@@ -13,10 +13,11 @@
 *.json
 !results/*.json
 
-# Keep compiled report and presentation PDFs
+# Keep compiled report, presentation PDFs, and root spec
 *.pdf
 !report/*.pdf
 !presentation/*.pdf
+!cmpe346_final_project.pdf
 
 # Python
 __pycache__/
