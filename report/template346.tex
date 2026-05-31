@@ -3,6 +3,9 @@
 \usepackage{styles/ibu-thesis}
 \usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{parskip}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
 
 \thesistitle{Text Classification in NLP: Media Bias Detection, [Student 2 Topic], and [Student 3 Topic]}
 
@@ -18,7 +21,7 @@
 \submissiondate{June 2026}
 
 \abstract{
-In this paper, we investigate text classification across three distinct NLP tasks: media bias detection in news articles, [Student 2 task], and [Student 3 task]. Each task represents a different application of classification in the NLP domain. Three deep learning architectures are evaluated across all tasks: a Bidirectional LSTM trained from scratch, and two transformer-based pretrained models, BERT and RoBERTa. Each model is fine-tuned on a task-specific dataset and evaluated using accuracy and weighted F1-score. For media bias detection, RoBERTa achieves the best performance with 84.60\% accuracy and a weighted F1-score of 0.8464. Across all three tasks, transformer-based models consistently outperform the BiLSTM baseline.
+In this paper we will explore text classification on three different NLP applications; media bias detection on news articles, [Student 2 task], and [Student 3 task]. The three tasks, taken together, illustrate a range of the types of classification found within NLP. Three deep learning architectures will be experimented on for each task; a Bidirectional LSTM trained from scratch, the two pre-trained transformers BERT, and RoBERTa. The models are fine-tuned on task specific data and measured by accuracy and weighted F1-score. For media bias detection, RoBERTa outperformed all models yielding an accuracy of 84.60%, and a weighted F1-score of 0.8464. The three tasks demonstrate a trend across the models; transformers outperforms the BiLSTM.
 }
 
 \begin{document}
@@ -116,13 +119,13 @@ Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scor
 \toprule
 \textbf{Sentence} & \textbf{True} & \textbf{LSTM} & \textbf{BERT} & \textbf{RoBERTa} \\
 \midrule
-\textit{``Nearly 78\% of Americans report experiencing concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\
+\textit{`Nearly 78\% of Americans report experiencing concern about the climate...''} & NB & NB\,\checkmark & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``Companies like Nike and Google have made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
+\textit{Companies like Nike and Google have made Juneteenth a paid holiday.''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``Rahaf Mohammed al-Qunun's case drew global attention to Saudi Arabia's strict social rules...''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
+\textit{Rahaf Mohammed al-Qunun's case drew global attention to Saudi Arabia's strict social rules...''} & NB & B\,\(\times\) & NB\,\checkmark & NB\,\checkmark \\
 \addlinespace
-\textit{``None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,\(\times\) & B\,\checkmark \\
+\textit{`None of Biden's Democrat counterparts challenged his claim of economic selflessness.''} & B & B\,\checkmark & NB\,\(\times\) & B\,\checkmark \\
 \bottomrule
 \end{tabular}
 \caption{Qualitative prediction examples. NB = Not Biased, B = Biased. \checkmark\,= correct, \(\times\)\,= incorrect.}
@@ -132,18 +135,16 @@ Figure \ref{fig:comparison} provides a visual comparison of accuracy and F1 scor
 \newpage
 
 \section{Discussion}
+It's noticeable from these numbers that there is a hierarchy of performance among the three architectures. The Bidirectional LSTM attained 65.60\% accuracy and weighted F1 of 0.6511, which is better than random chance, but quite poor relative to the other architectures based on transformers. These numbers also suggest the challenge of learning both representations and task-specific patterns without any pretraining on the relatively small media bias dataset.
 
-From these figures, it is clear that there is a performance hierarchy across the three architectures. The Bidirectional LSTM achieves 65.60\% accuracy and a weighted F1 of 0.6511, which, while above random chance, falls well short of the transformer-based models. This gap reflects the difficulty of learning both language representations and task-specific patterns from scratch on a relatively small dataset.
+BERT has promising results, reaching 82.60\% accuracy and a weighted F1 of 0.8266, which highlights the advantages of transfer learning. As can be seen from the confusion matrix in Figure \ref{fig:confusion}, BERT was able to classify both classes more consistently, with far fewer incorrect classifications of biased sentences compared to the LSTM.
 
-BERT scores well, gaining 82.60\% accuracy and a weighted F1 of 0.8266, demonstrating the power of transfer learning. The confusion matrix in Figure \ref{fig:confusion} shows that BERT handles both classes much more reliably than the LSTM, with fewer misclassifications on biased sentences.
-
-RoBERTa achieves 84.60\% accuracy and a weighted F1 of 0.8464, making it the best performing model in this study. The RoBERTa paper attributes its downstream improvements to a more carefully optimized pre-training procedure: the removal of the next sentence prediction objective, dynamic masking, larger batches, and more training data \cite{liu2019}. These pretraining differences translate to a measurable advantage on the media bias detection task, even though the margin over BERT is modest at approximately 2 percentage points.
-
+The best performing model in this experiment is RoBERTa, with an accuracy of 84.60\% and a weighted F1 of 0.8464. The authors of RoBERTa attributed the improvement over BERT to a set of changes made to the BERT pre-training objective: discarding the next sentence prediction task, implementing dynamic masking of input tokens, using larger batches and more training data \cite{liu2019}. The impact of this change can be seen in the modest but consistent gains in performance over BERT, just over two percentage points for media bias detection.
 \newpage
 
 \section{Conclusion}
 
-In this paper, three different deep learning architectures were implemented for media bias detection on the BABE dataset. The experimental results showed that the pretrained transformers performed significantly better than the LSTM baseline, and the best model was RoBERTa with 84.60\% accuracy and a weighted F1-score of 0.8464. The experiments also showed that pretraining plays an important role for low-resource classification tasks, where learning the language nuances of news framing and bias from scratch is difficult. Future work can use larger transformer models or domain-adaptive pretraining on news corpora.
+We built three different architectures of deep learning models for media bias detection on BABE dataset. The experimental results demonstrate thatpretrained transformers models obtained substantially superior performance to the LSTM baseline, and RoBERTa obtained the best performance: 84.60% accuracy and 0.8464 weighted F1 score. These experiments also prove the significant effect of pretraining on low-resource classification tasks, due to the difficulty to learn the features and characteristics of news framing and media bias from scratch. Future directions could explore larger transformer models or domain-adaptive pretraining on the corpus of news.
 
 %% ─────────────────────────────────────────────
 \chapter{[Student 2 Name] --- [Student 2 Topic]}
