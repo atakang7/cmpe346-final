@@ -2,9 +2,9 @@
 Generates the 3 report figures and saves them to results/.
 """
 import os
-import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 

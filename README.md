@@ -12,7 +12,7 @@
 
 ## Requirements
 ```
-pip install torch transformers datasets scikit-learn
+pip install -r requirements.txt
 ```
 
 ## How to Run

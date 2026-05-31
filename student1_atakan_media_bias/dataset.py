@@ -37,13 +37,14 @@ class BABEDataset(Dataset):
         return {"text": text, "label": torch.tensor(label, dtype=torch.long)}
 
 
-def get_vocab(dataset):
-    """Build vocabulary from a list of BABEDataset items (for LSTM)."""
+def get_vocab(dataset, indices=None):
+    """Build vocabulary from dataset, optionally restricted to given indices (to avoid val leakage)."""
     from collections import Counter
     import re
 
     counter = Counter()
-    for text in dataset.texts:
+    texts = [dataset.texts[i] for i in indices] if indices is not None else dataset.texts
+    for text in texts:
         tokens = re.findall(r'\w+', text.lower())
         counter.update(tokens)
     vocab = {"<PAD>": 0, "<UNK>": 1}

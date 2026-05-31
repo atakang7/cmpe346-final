@@ -94,13 +94,19 @@ def run_lstm(test_loader, train_loader, val_loader, vocab):
 
 
 if __name__ == "__main__":
+    # fix all random seeds for reproducibility
+    torch.manual_seed(42)
+    torch.cuda.manual_seed_all(42)
+
+    # run from any directory
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     os.makedirs("results", exist_ok=True)
 
-    # LSTM loaders — split train into train/val
+    # split first, then build vocab only from train subset to avoid leakage
     train_ds_raw = BABEDataset("train")
     test_ds_raw = BABEDataset("test")
-    vocab = get_vocab(train_ds_raw)
     lstm_train_sub, lstm_val_sub = split_train_val(train_ds_raw)
+    vocab = get_vocab(lstm_train_sub.dataset, indices=lstm_train_sub.indices)
     collate_fn = lambda b: collate_lstm(b, vocab, MAX_LENGTH)
     lstm_train_loader = DataLoader(lstm_train_sub, batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
     lstm_val_loader = DataLoader(lstm_val_sub, batch_size=BATCH_SIZE, collate_fn=collate_fn)

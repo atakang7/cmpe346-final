@@ -86,16 +86,16 @@ Classify a news sentence as \textit{biased} or \textit{not biased}.
 \column{0.45\textwidth}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\textbf{Model} & \textbf{Acc.} & \textbf{W-F1} \\
 \midrule
-BiLSTM   & 0.656 & 0.651 \\
-BERT     & 0.826 & 0.827 \\
-RoBERTa  & \textbf{0.846} & \textbf{0.846} \\
+BiLSTM   & 0.6560 & 0.6511 \\
+BERT     & 0.8260 & 0.8266 \\
+RoBERTa  & \textbf{0.8460} & \textbf{0.8464} \\
 \bottomrule
 \end{tabular}
 \vspace{0.3cm}
 \begin{itemize}
-    \item RoBERTa best: +19pp over BiLSTM
+    \item RoBERTa best: +19pp accuracy over BiLSTM
     \item BERT close behind
     \item BiLSTM struggles on subtle bias
 \end{itemize}
@@ -226,12 +226,12 @@ RoBERTa  & — & — \\
 \begin{center}
 \begin{tabular}{llcc}
 \toprule
-\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{W-F1} \\
 \midrule
 \multirow{3}{*}{Media Bias}
-    & BiLSTM  & 0.656 & 0.651 \\
-    & BERT    & 0.826 & 0.827 \\
-    & RoBERTa & \textbf{0.846} & \textbf{0.846} \\
+    & BiLSTM  & 0.6560 & 0.6511 \\
+    & BERT    & 0.8260 & 0.8266 \\
+    & RoBERTa & \textbf{0.8460} & \textbf{0.8464} \\
 \midrule
 \multirow{3}{*}{[Student 2]}
     & BiLSTM  & — & — \\
