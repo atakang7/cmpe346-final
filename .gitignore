@@ -13,6 +13,7 @@ saved_models/
 *.csv
 *.json
 !**/results/results.json
+!**/results/results.csv
 
 # Keep compiled report, presentation PDFs, and root spec
 *.pdf
