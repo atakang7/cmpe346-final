@@ -20,7 +20,7 @@
 
 \title{Text Classification in NLP}
 \subtitle{CMPE346 · Group 2}
-\author{Atakan Gül \and Ece Doğa Gül \and [Student 3]}
+\author{Atakan Gül \and Ece Doğa Gül \and Talha Demir}
 \date{June 5, 2026}
 
 \begin{document}
@@ -45,7 +45,7 @@ Accuracy \& F1
 \midrule
 Atakan Gül    & Media Bias Detection \\
 Ece Doğa Gül & Sexism Detection \\
-{[Student 3]} & {[Topic]} \\
+Talha Demir & Ghost-Job Risk Classification \\
 \bottomrule
 \end{tabular}
 \end{columns}
@@ -214,47 +214,64 @@ RoBERTa  & 0.8545 & 0.7981 \\
 
 %% ══ STUDENT 3 ════════════════════════════════
 
-\begin{frame}{[Student 3] — [Topic]}
+\begin{frame}{Talha Demir — Ghost-Job Risk Classification}
 \begin{columns}[t]
 \column{0.5\textwidth}
 \textbf{Task}\\[0.2cm]
-[Description]
+Classify job postings by visible ghost-job risk evidence.
 \column{0.5\textwidth}
-\textbf{Dataset: [Name]}\\[0.2cm]
+\textbf{Dataset: Zenodo 20321172}\\[0.2cm]
 \begin{itemize}
-    \item [Stats]
-    \item [Train / test split]
+    \item unified\_core job postings
+    \item Evidence-based target correction
+    \item 3:1 realistic-to-ghost downsampled splits
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{[Student 3] — Results}
+\begin{frame}{Talha — Results}
 \begin{columns}[c]
 \column{0.45\textwidth}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\textbf{Model} & \textbf{Acc.} & \textbf{W-F1} \\
 \midrule
-BiLSTM   & — & — \\
-BERT     & — & — \\
-RoBERTa  & — & — \\
+BiLSTM   & 0.8636 & 0.8569 \\
+BERT     & 0.9015 & 0.9029 \\
+RoBERTa  & \textbf{0.9621} & \textbf{0.9610} \\
 \bottomrule
 \end{tabular}
 \vspace{0.3cm}
 \begin{itemize}
-    \item [Key finding 1]
-    \item [Key finding 2]
+    \item RoBERTa best overall
+    \item BERT improves likely-ghost recall over BiLSTM
 \end{itemize}
 \column{0.55\textwidth}
-\textit{[Figure]}
+\includegraphics[width=\linewidth]{talha_model_comparison.png}
 \end{columns}
 \end{frame}
 
-\begin{frame}{[Student 3] — Conclusion}
+\begin{frame}{Talha — Prediction Examples}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{8cm}ccc}
+\toprule
+\textbf{Posting signal} & \textbf{True} & \textbf{RoBERTa} & \textbf{Why it matters} \\
+\midrule
+\textit{``This position is contingent upon contract award.''} & Ghost & Ghost\,\checkmark & Explicit contingency \\[0.35cm]
+\textit{``Join our talent community for future opportunities.''} & Ghost & Ghost\,\checkmark & Pipeline-only wording \\[0.35cm]
+\textit{``We are shaping the future of AI with an active engineering team.''} & Realistic & Ghost\,$\times$ & Hard phrase: harmless ``future'' context \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.2cm}
+{\footnotesize Ghost = likely ghost-risk \quad \checkmark\,= correct \quad $\times$\,= incorrect}
+\end{frame}
+
+\begin{frame}{Talha — Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item [Finding 1]
-    \item [Finding 2]
-    \item [Finding 3]
+    \item Dataset correction was essential because raw ghost labels were noisy
+    \item Labels reflect visible text signals, not verified hiring outcomes
+    \item RoBERTa reaches 96.21\% accuracy and 0.9610 weighted F1
 \end{itemize}
 \end{frame}
 
@@ -276,20 +293,20 @@ RoBERTa  & — & — \\
     & BERT    & \textbf{0.8565} & \textbf{0.8115} \\
     & RoBERTa & 0.8545 & 0.7981 \\
 \midrule
-\multirow{3}{*}{[Student 3]}
-    & BiLSTM  & — & — \\
-    & BERT    & — & — \\
-    & RoBERTa & — & — \\
+\multirow{3}{*}{Ghost Jobs}
+    & BiLSTM  & 0.8636 & 0.8569 \\
+    & BERT    & 0.9015 & 0.9029 \\
+    & RoBERTa & \textbf{0.9621} & \textbf{0.9610} \\
 \bottomrule
 \end{tabular}
 \end{center}
-{\footnotesize Media Bias: weighted F1 \quad Sexism Detection: macro F1}
+{\footnotesize Media Bias and Ghost Jobs: weighted F1 \quad Sexism Detection: macro F1}
 \end{frame}
 
 \begin{frame}{Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
     \item Transformers consistently outperform BiLSTM — pretraining is decisive on small datasets
-    \item RoBERTa is the strongest model across all completed experiments
+    \item The best transformer can vary by task: RoBERTa leads media bias and ghost jobs, while BERT leads sexism detection
 \end{itemize}
 \end{frame}
 
