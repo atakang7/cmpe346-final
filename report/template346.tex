@@ -7,12 +7,12 @@
 \setlength{\parskip}{0.6em}
 \setlength{\parindent}{0pt}
 
-\thesistitle{Text Classification in NLP: Media Bias Detection, [Student 2 Topic], and [Student 3 Topic]}
+\thesistitle{Text Classification in NLP: Media Bias Detection, Sexism Detection, and [Student 3 Topic]}
 
 \authors[1]{Atakan G\"{u}l}
 \authorsid[1]{121200152}
-\authors[2]{[Student 2 Name]}
-\authorsid[2]{[Student 2 ID]}
+\authors[2]{Ece Doga G\"{u}l}
+\authorsid[2]{121200123}
 \authors[3]{[Student 3 Name]}
 \authorsid[3]{[Student 3 ID]}
 
@@ -21,7 +21,7 @@
 \submissiondate{June 2026}
 
 \abstract{
-In this paper we will explore text classification on three different NLP applications; media bias detection on news articles, [Student 2 task], and [Student 3 task]. The three tasks, taken together, illustrate a range of the types of classification found within NLP. Three deep learning architectures will be experimented on for each task; a Bidirectional LSTM trained from scratch, the two pre-trained transformers BERT, and RoBERTa. The models are fine-tuned on task specific data and measured by accuracy and weighted F1-score. For media bias detection, RoBERTa outperformed all models yielding an accuracy of 84.60%, and a weighted F1-score of 0.8464. The three tasks demonstrate a trend across the models; transformers outperforms the BiLSTM.
+In this paper we will explore text classification on three different NLP applications; media bias detection on news articles, sexism detection on social media comments, and [Student 3 task]. The three tasks, taken together, illustrate a range of the types of classification found within NLP. Three deep learning architectures will be experimented on for each task; a Bidirectional LSTM trained from scratch, the two pre-trained transformers BERT, and RoBERTa. The models are fine-tuned on task specific data and measured by accuracy and F1-score. For media bias detection, RoBERTa outperformed all models yielding an accuracy of 84.60\%, and a weighted F1-score of 0.8464. For sexism detection, BERT performed best with an accuracy of 85.65\% and a macro F1-score of 0.8115. The three tasks demonstrate a trend across the models; transformers outperforms the BiLSTM.
 }
 
 \begin{document}
@@ -147,22 +147,72 @@ The best performing model in this experiment is RoBERTa, with an accuracy of 84.
 We built three different architectures of deep learning models for media bias detection on BABE dataset. The experimental results demonstrate thatpretrained transformers models obtained substantially superior performance to the LSTM baseline, and RoBERTa obtained the best performance: 84.60% accuracy and 0.8464 weighted F1 score. These experiments also prove the significant effect of pretraining on low-resource classification tasks, due to the difficulty to learn the features and characteristics of news framing and media bias from scratch. Future directions could explore larger transformer models or domain-adaptive pretraining on the corpus of news.
 
 %% ─────────────────────────────────────────────
-\chapter{[Student 2 Name] --- [Student 2 Topic]}
-
+\chapter{Ece Doga G\"{u}l --- Sexism Detection}
 \section{Methodology}
-\textit{[Student 2 fills this in]}
+
+The problem of this work is to detect sexism from social media comments. In this work, the problem of sexism detection is formulated as a binary text classification problem in which a classifier predicts if a comment is sexist or non-sexist. This problem is hard in NLP as sexism is generally expressed implicitly by indirect words and sarcasm.
+
+In this work, three models are experimented:
+
+\textbf{Bidirectional LSTM}. LSTM (Long Short-Term Memory) networks are a specific type of recurrent neural networks capable of learning long term dependencies in sequences \cite{hochreiter1997}. Bidirectional LSTM passes the input sequence forward and backward, so the context is taken into account to a full extent. The network is composed of embedding layer, two stacked bidirectional LSTM layer (with 256 hidden dimension), and a linear classification layer taking average of final hidden states.
+
+\textbf{BERT.} BERT is a pre-trained language model using the Transformer encoder architecture \cite{devlin2019}. The model is pre-trained on a massive corpus of text using masked language modeling and next sentence prediction tasks, thereby learning deep contextualized representations. A linear classification layer is added over the \texttt{[CLS]} token's representation. We use the \texttt{bert-base-uncased} version.
+
+\textbf{RoBERTa.} RoBERTa is a version of BERT where the next sentence prediction objective is removed, it uses dynamic masking, and it is pre-trained with bigger batches and more data. \cite{liu2019}. Performance gains on most tasks are usually observed with this change. We are using roberta-base.
+
+Fine tuning for the transformer models such as BERT and RoBERTa. The LSTM is trained from scratch. AdamW optimizer and Adam optimizer are used accordingly.
+
 \newpage
 
 \section{Experiments \& Findings}
-\textit{[Student 2 fills this in]}
+
+\textbf{Dataset.} The EDOS (Explainable Detection of Online Sexism) dataset from SemEval-2023 has been used for this project. \cite{kirk2023}. In the EDOS, there are 20,000 English social media comments from Reddit and Gab with labels of sexism or not. It's been split into 14,000 training, 2,000 development, and 4,000 test examples already. One thing to consider about this dataset is the class imbalance since it is estimated that only 24.3\% are sexist while 75.7\% are not.
+
+\textbf{Training Configuration.} We trained all models for 3 epochs. The transformer models used the AdamW optimizer with a learning rate of $2 \times 10^{-5}$ and a batch size of 32. Every input sequence was padded or truncated to 128 tokens. I trained the LSTM using Adam as the optimizer, with a learning rate of $1 \times 10^{-3}$. The embedding layer had a size of 128. It has two bidirectional layers, each with a hidden size of 256. All my experiments ran on an NVIDIA GeForce RTX 5070 Laptop GPU.
+
+\textbf{Results.} Table \ref{tab:ece_results} represents the performance of each model in the EDOS test set. The metrics are accuracy and macro F1-score.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Model} & \textbf{Accuracy} & \textbf{Macro F1} \\
+        \midrule
+        LSTM      & 0.8365 & 0.7530 \\
+        BERT      & \textbf{0.8565} & \textbf{0.8115} \\
+        RoBERTa   & 0.8545 & 0.7981 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Model performance for sexism detection on the EDOS dataset.}
+    \label{tab:ece_results}
+\end{table}
+
+Figure \ref{fig:ece_comparison} shows the accuracy and macro F1 of all three models.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/comparison_sexism.png}
+    \caption{BERT achieves best performance. Both transformer models outperforms the BiLSTM.}
+    \label{fig:ece_comparison}
+\end{figure}
+
 \newpage
 
 \section{Discussion}
-\textit{[Student 2 fills this in]}
+
+It is noteworthy the difference between the performance of the transformer pre-trained models and the LSTM. With an accuracy of 83.65\% and a macro F1 of 0.7530, the Bidirectional LSTM appears to have similar accuracy compared to transformer models, but the macro F1 is much lower, indicating its poor performance at correctly predicting the minority (sexist) class, which is to be expected given the class imbalance and lack of pre-training.
+
+With 85.65\% and 0.8115 macro F1, BERT out performed all other models, this can be considered proof for transfer learning, the transformer was able to encode context based representation that was able to capture the inherent sexism that the LSTM failed to pick up.
+
+Interestingly, RoBERTa (85.45\% accuracy and a macro F1 of 0.7981) scored lower than BERT, despite RoBERTa generally outperforming BERT on downstream tasks. It is possible that, due to the small number of training epochs and the moderate dataset size, RoBERTa was unable to make full use of its potential. The gap is slight, however, and the superiority of the transformer models over the LSTM remains clear.
+
+The macro F1 scores remain lower than the accuracy across all models because the equal weighting of both classes in macro F1 penalizes models that perform poorly on the minority (sexist) class. This makes macro F1 a better indication of how well the model actually performs on the task where the classes are imbalanced.
+
 \newpage
 
 \section{Conclusion}
-\textit{[Student 2 fills this in]}
+
+Three architectures are evaluated for the sexism detection. In light of the experimental results it is clear that transformer based architectures pre-trained and then fine-tuned are performing better than the baseline LSTM architecture and among transformer architectures, BERT achieved highest accuracy of 85.65\% and Macro F1 of 0.8115. These results demonstrate the benefit of pretraining for identifying implicit and context-dependent sexist language, which is difficult to learn from scratch on imbalanced data.
 
 %% ─────────────────────────────────────────────
 \chapter{[Student 3 Name] --- [Student 3 Topic]}

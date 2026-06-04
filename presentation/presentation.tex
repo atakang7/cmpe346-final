@@ -20,7 +20,7 @@
 
 \title{Text Classification in NLP}
 \subtitle{CMPE346 · Group 2}
-\author{Atakan Gül \and [Student 2] \and [Student 3]}
+\author{Atakan Gül \and Ece Doğa Gül \and [Student 3]}
 \date{June 5, 2026}
 
 \begin{document}
@@ -37,14 +37,14 @@
 \textbf{Group task}\\[0.3cm]
 Text Classification\\[0.5cm]
 \textbf{Metric}\\[0.3cm]
-Accuracy \& Weighted F1
+Accuracy \& F1
 \column{0.65\textwidth}
 \begin{tabular}{ll}
 \toprule
 \textbf{Student} & \textbf{Task} \\
 \midrule
 Atakan Gül    & Media Bias Detection \\
-{[Student 2]} & {[Topic]} \\
+Ece Doğa Gül & Sexism Detection \\
 {[Student 3]} & {[Topic]} \\
 \bottomrule
 \end{tabular}
@@ -126,48 +126,90 @@ RoBERTa  & \textbf{0.8460} & \textbf{0.8464} \\
 
 %% ══ STUDENT 2 ════════════════════════════════
 
-\begin{frame}{[Student 2] — [Topic]}
+\begin{frame}{Ece Doğa Gül — Sexism Detection}
+
 \begin{columns}[t]
+
 \column{0.5\textwidth}
+
 \textbf{Task}\\[0.2cm]
-[Description]
+
+Classify a social media comment as \textit{sexist} or \textit{not sexist}.
+
 \column{0.5\textwidth}
-\textbf{Dataset: [Name]}\\[0.2cm]
+
+\textbf{Dataset: EDOS}\\[0.2cm]
+
 \begin{itemize}
-    \item [Stats]
-    \item [Train / test split]
+
+    \item 20,000 comments from Reddit \& Gab
+
+    \item SemEval-2023 Task 10
+
+    \item 14,000 train / 2,000 dev / 4,000 test
+
 \end{itemize}
+
 \end{columns}
+
 \end{frame}
 
-\begin{frame}{[Student 2] — Results}
+\begin{frame}{Ece — Results}
+
 \begin{columns}[c]
+
 \column{0.45\textwidth}
+
 \begin{tabular}{lcc}
+
 \toprule
+
 \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+
 \midrule
-BiLSTM   & — & — \\
-BERT     & — & — \\
-RoBERTa  & — & — \\
+
+BiLSTM   & 0.8365 & 0.7530 \\
+
+BERT     & \textbf{0.8565} & \textbf{0.8115} \\
+
+RoBERTa  & 0.8545 & 0.7981 \\
+
 \bottomrule
+
 \end{tabular}
+
 \vspace{0.3cm}
+
+{\footnotesize F1 = macro F1}
+
+\vspace{0.3cm}
+
 \begin{itemize}
-    \item [Key finding 1]
-    \item [Key finding 2]
+
+    \item BERT best across both metrics
+
+    \item Transformers handle class imbalance better than BiLSTM
+
 \end{itemize}
+
 \column{0.55\textwidth}
-\textit{[Figure]}
+
+\includegraphics[width=\linewidth]{comparison_sexism.png}
+
 \end{columns}
+
 \end{frame}
 
-\begin{frame}{[Student 2] — Conclusion}
+\begin{frame}{Ece — Conclusion}
+
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item [Finding 1]
-    \item [Finding 2]
-    \item [Finding 3]
+
+    \item Pretrained transformers outperform the BiLSTM baseline on sexism detection
+
+    \item BERT is the best model — 85.65\% accuracy, 0.8115 macro F1
+
 \end{itemize}
+
 \end{frame}
 
 %% ══ STUDENT 3 ════════════════════════════════
@@ -222,17 +264,17 @@ RoBERTa  & — & — \\
 \begin{center}
 \begin{tabular}{llcc}
 \toprule
-\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{W-F1} \\
+\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
 \midrule
 \multirow{3}{*}{Media Bias}
     & BiLSTM  & 0.6560 & 0.6511 \\
     & BERT    & 0.8260 & 0.8266 \\
     & RoBERTa & \textbf{0.8460} & \textbf{0.8464} \\
 \midrule
-\multirow{3}{*}{[Student 2]}
-    & BiLSTM  & — & — \\
-    & BERT    & — & — \\
-    & RoBERTa & — & — \\
+\multirow{3}{*}{Sexism Detection}
+    & BiLSTM  & 0.8365 & 0.7530 \\
+    & BERT    & \textbf{0.8565} & \textbf{0.8115} \\
+    & RoBERTa & 0.8545 & 0.7981 \\
 \midrule
 \multirow{3}{*}{[Student 3]}
     & BiLSTM  & — & — \\
@@ -241,6 +283,7 @@ RoBERTa  & — & — \\
 \bottomrule
 \end{tabular}
 \end{center}
+{\footnotesize Media Bias: weighted F1 \quad Sexism Detection: macro F1}
 \end{frame}
 
 \begin{frame}{Conclusion}
