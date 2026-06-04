@@ -3,6 +3,9 @@
 .ipynb_checkpoints/
 
 # No model weights or datasets
+data/
+*/data/
+*.parquet
 saved_models/
 *.pt
 *.pth

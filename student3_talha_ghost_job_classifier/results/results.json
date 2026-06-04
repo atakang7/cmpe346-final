@@ -1,0 +1,35 @@
+{
+  "student": "Talha Demir",
+  "student_id": "122200106",
+  "topic": "Ghost-Job Risk Classification",
+  "dataset": "Zenodo record 20321172 unified_core.parquet",
+  "note": "Reference metrics from the completed local final-project runs. Re-running main.py may produce small differences because model weights are not committed.",
+  "results": {
+    "LSTM": {
+      "accuracy": 0.8636,
+      "precision": 0.8,
+      "recall": 0.6061,
+      "f1": 0.8569,
+      "positive_f1": 0.6897
+    },
+    "BERT": {
+      "accuracy": 0.9015,
+      "precision": 0.7778,
+      "recall": 0.8485,
+      "f1": 0.9029,
+      "positive_f1": 0.8116
+    },
+    "RoBERTa": {
+      "accuracy": 0.9621,
+      "precision": 1.0,
+      "recall": 0.8485,
+      "f1": 0.961,
+      "positive_f1": 0.918
+    }
+  },
+  "split_sizes": {
+    "train": 1068,
+    "validation": 136,
+    "test": 132
+  }
+}

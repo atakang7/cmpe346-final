@@ -20,7 +20,7 @@
 
 \title{Text Classification in NLP}
 \subtitle{CMPE346 · Group 2}
-\author{Atakan Gül \and Ece Doğa Gül \and [Student 3]}
+\author{Atakan Gül \and Ece Doğa Gül \and Talha Demir}
 \date{June 5, 2026}
 
 \begin{document}
@@ -45,7 +45,7 @@ Accuracy \& F1
 \midrule
 Atakan Gül    & Media Bias Detection \\
 Ece Doğa Gül & Sexism Detection \\
-{[Student 3]} & {[Topic]} \\
+Talha Demir & Ghost-Job Risk Classification \\
 \bottomrule
 \end{tabular}
 \end{columns}
@@ -214,82 +214,119 @@ RoBERTa  & 0.8545 & 0.7981 \\
 
 %% ══ STUDENT 3 ════════════════════════════════
 
-\begin{frame}{[Student 3] — [Topic]}
+\begin{frame}{Talha — Problem \& Dataset}
+\begin{block}{Goal}
+Detect whether a job posting contains visible ghost-job risk signals.
+\end{block}
+\vspace{0.25cm}
 \begin{columns}[t]
-\column{0.5\textwidth}
-\textbf{Task}\\[0.2cm]
-[Description]
-\column{0.5\textwidth}
-\textbf{Dataset: [Name]}\\[0.2cm]
+\column{0.48\textwidth}
+\textbf{What counts as risk?}
 \begin{itemize}
-    \item [Stats]
-    \item [Train / test split]
+    \item Contract/funding contingency
+    \item No-current-opening language
+    \item Talent-pool or future-opportunity wording
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Dataset preparation}
+\begin{itemize}
+    \item Zenodo 20321172, unified\_core
+    \item Noisy raw labels corrected by text evidence
+    \item 3:1 realistic-to-ghost split balance
 \end{itemize}
 \end{columns}
+\vspace{0.2cm}
+{\footnotesize The task is about text evidence, not proving whether a company actually hired.}
 \end{frame}
 
-\begin{frame}{[Student 3] — Results}
+\begin{frame}{Talha — Results}
 \begin{columns}[c]
-\column{0.45\textwidth}
+\column{0.38\textwidth}
+\begin{block}{Best model}
+\centering
+{\Huge 96.21\%}\\
+{\small accuracy}\\[0.25cm]
+{\Huge 0.9610}\\
+{\small weighted F1}\\[0.15cm]
+{\large RoBERTa}
+\end{block}
+\column{0.58\textwidth}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\textbf{Model} & \textbf{Acc.} & \textbf{W-F1} \\
 \midrule
-BiLSTM   & — & — \\
-BERT     & — & — \\
-RoBERTa  & — & — \\
+BiLSTM   & 0.8636 & 0.8569 \\
+BERT     & 0.9015 & 0.9029 \\
+RoBERTa  & \textbf{0.9621} & \textbf{0.9610} \\
 \bottomrule
 \end{tabular}
 \vspace{0.3cm}
 \begin{itemize}
-    \item [Key finding 1]
-    \item [Key finding 2]
+    \item Both transformers beat the LSTM baseline
+    \item RoBERTa gives the strongest overall result
 \end{itemize}
-\column{0.55\textwidth}
-\textit{[Figure]}
 \end{columns}
 \end{frame}
 
-\begin{frame}{[Student 3] — Conclusion}
-\begin{itemize}\setlength\itemsep{0.5cm}
-    \item [Finding 1]
-    \item [Finding 2]
-    \item [Finding 3]
-\end{itemize}
+\begin{frame}{Talha — Prediction Examples}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Contingency}
+{\small ``Contingent upon contract award''}\\[0.2cm]
+{\footnotesize RoBERTa: Ghost \checkmark}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Pipeline wording}
+{\small ``Talent community for future opportunities''}\\[0.2cm]
+{\footnotesize RoBERTa: Ghost \checkmark}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ambiguous phrase}
+{\small ``Shaping the future of AI with an active team''}\\[0.2cm]
+{\footnotesize RoBERTa: Ghost $\times$}
+\end{block}
+\end{columns}
+\vspace{0.35cm}
+\begin{block}{Presentation point}
+The model reacts to visible wording. That makes claim boundaries important.
+\end{block}
+\end{frame}
+
+\begin{frame}{Talha — Takeaways}
+\begin{block}{1. Data cleanup mattered}
+Raw labels were noisy, so the target was rebuilt from visible text evidence.
+\end{block}
+\begin{block}{2. Transformers worked better}
+BERT and RoBERTa outperformed the LSTM baseline on the same split.
+\end{block}
+\begin{block}{3. RoBERTa was best for this task}
+RoBERTa reached 96.21\% accuracy and 0.9610 weighted F1.
+\end{block}
 \end{frame}
 
 %% ══ GROUP CONCLUSION ═════════════════════════
 
-\begin{frame}{All Results}
+\begin{frame}{Best Model by Task}
 \begin{center}
 \begin{tabular}{llcc}
 \toprule
-\textbf{Task} & \textbf{Model} & \textbf{Acc.} & \textbf{F1} \\
+\textbf{Task} & \textbf{Best model} & \textbf{Acc.} & \textbf{F1} \\
 \midrule
-\multirow{3}{*}{Media Bias}
-    & BiLSTM  & 0.6560 & 0.6511 \\
-    & BERT    & 0.8260 & 0.8266 \\
-    & RoBERTa & \textbf{0.8460} & \textbf{0.8464} \\
-\midrule
-\multirow{3}{*}{Sexism Detection}
-    & BiLSTM  & 0.8365 & 0.7530 \\
-    & BERT    & \textbf{0.8565} & \textbf{0.8115} \\
-    & RoBERTa & 0.8545 & 0.7981 \\
-\midrule
-\multirow{3}{*}{[Student 3]}
-    & BiLSTM  & — & — \\
-    & BERT    & — & — \\
-    & RoBERTa & — & — \\
+Media Bias & RoBERTa & 0.8460 & 0.8464 \\
+Sexism Detection & BERT & 0.8565 & 0.8115 \\
+Ghost Jobs & RoBERTa & 0.9621 & 0.9610 \\
 \bottomrule
 \end{tabular}
 \end{center}
-{\footnotesize Media Bias: weighted F1 \quad Sexism Detection: macro F1}
+\vspace{0.25cm}
+{\footnotesize Media Bias and Ghost Jobs: weighted F1 \quad Sexism Detection: macro F1}
 \end{frame}
 
 \begin{frame}{Conclusion}
 \begin{itemize}\setlength\itemsep{0.5cm}
-    \item Transformers consistently outperform BiLSTM — pretraining is decisive on small datasets
-    \item RoBERTa is the strongest model across all completed experiments
+    \item Pretrained transformers consistently outperform the BiLSTM baseline
+    \item The best transformer depends on the dataset and label structure
+    \item Careful dataset preparation is as important as model choice
 \end{itemize}
 \end{frame}
 
