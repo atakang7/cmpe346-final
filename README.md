@@ -6,7 +6,7 @@
 ## Students
 | Folder | Student | Topic | Dataset |
 |--------|---------|-------|---------|
-| student1_atakan_media_bias | Atakan Gül (121200152) | Media Bias Detection | mediabiasgroup/BABE |
+| student1_atakan_media_bias | Atakan Gül | Media Bias Detection | mediabiasgroup/BABE |
 | student2_topic | [Name] | [Topic] | [Dataset] |
 | student3_topic | [Name] | [Topic] | [Dataset] |
 
