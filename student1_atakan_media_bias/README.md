@@ -1,4 +1,4 @@
-# Media Bias Detection — Atakan Gül (121200152)
+# Media Bias Detection — Atakan Gül
 
 Binary text classification of news sentences as **biased** or **not biased**.
 
