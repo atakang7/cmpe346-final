@@ -138,7 +138,6 @@ if __name__ == "__main__":
 
     output = {
         "student": "Talha Demir",
-        "student_id": "122200106",
         "topic": "Ghost-Job Risk Classification",
         "dataset": "Zenodo record 20321172 unified_core.parquet",
         "results": results,
