@@ -6,9 +6,9 @@
 ## Students
 | Folder | Student | Topic | Dataset |
 |--------|---------|-------|---------|
-| student1_atakan_media_bias | Atakan Gül (121200152) | Media Bias Detection | mediabiasgroup/BABE |
-| student2_ece_sexism | Ece Doğa Gül (121200123) | Sexism Detection | EDOS / SemEval-2023 Task 10 |
-| student3_talha_ghost_job_classifier | Talha Demir (122200106) | Ghost-Job Risk Classification | Zenodo 20321172 unified_core |
+| student1_atakan_media_bias | Atakan Gül | Media Bias Detection | mediabiasgroup/BABE |
+| student2_ece_sexism | Ece Doğa Gül | Sexism Detection | EDOS / SemEval-2023 Task 10 |
+| student3_talha_ghost_job_classifier | Talha Demir | Ghost-Job Risk Classification | Zenodo 20321172 unified_core |
 
 ## How to Run
 Each student's code is self-contained in their folder.
