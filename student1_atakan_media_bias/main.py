@@ -141,7 +141,6 @@ if __name__ == "__main__":
 
     output = {
         "student": "Atakan Gül",
-        "student_id": "121200152",
         "topic": "Media Bias Detection in News",
         "dataset": "mediabiasgroup/BABE",
         "results": results,
