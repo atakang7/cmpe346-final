@@ -1,6 +1,5 @@
 {
   "student": "Talha Demir",
-  "student_id": "122200106",
   "topic": "Ghost-Job Risk Classification",
   "dataset": "Zenodo record 20321172 unified_core.parquet",
   "note": "Reference metrics from the completed local final-project runs. Re-running main.py may produce small differences because model weights are not committed.",
