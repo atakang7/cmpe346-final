@@ -1,9 +1,13 @@
 # Presentation
 
-The slide source is `presentation.tex`. With `pdflatex` installed, run from the repository root:
+`render.sh` compiles `presentation.tex` into `2_cmpe346_final_presentation.pdf`.
+
+## Run
 
 ```bash
 bash presentation/render.sh
 ```
 
-The script writes `presentation/2_cmpe346_final_presentation.pdf` and stops if LaTeX fails.
+## Limits
+
+- Requires `pdflatex`; compilation errors stop the script.

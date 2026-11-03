@@ -3,9 +3,9 @@
 `main.py` trains LSTM, BERT, and RoBERTa classifiers on job-posting text labeled by visible hiring language.
 
 ```text
-+---------------+  downloads  +------------+  loads  +---------+  writes  +----------------------+
-| Zenodo 20321172 | ----------> | dataset.py | ------> | main.py | -------> | results/results.json |
-+---------------+              +------------+         +---------+          +----------------------+
++-----------------+  downloads  +------------+  loads   +---------+  writes  +----------------------+
+| Zenodo 20321172 | ----------->| dataset.py | -------->| main.py | -------->| results/results.json |
++-----------------+             +------------+          +---------+          +----------------------+
 ```
 
 ## Run
@@ -21,7 +21,7 @@ python student3_talha_ghost_job_classifier/main.py
 
 | var | default | what |
 | --- | --- | --- |
-| `GHOST_JOB_DATASET_URL` | Zenodo record `20321172` | Parquet download source |
+| `GHOST_JOB_DATASET_URL` | `https://zenodo.org/api/records/20321172/files/unified_core.parquet/content` | Parquet source |
 
 ## Limits
 

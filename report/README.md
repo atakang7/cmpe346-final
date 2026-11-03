@@ -1,9 +1,13 @@
 # Report
 
-The LaTeX source is `template346.tex`; figures are under `figures/`. With `pdflatex` installed, run from the repository root:
+`render.sh` compiles `template346.tex` into `2_cmpe346_final.pdf`.
+
+## Run
 
 ```bash
 bash report/render.sh
 ```
 
-The script writes `report/2_cmpe346_final.pdf` and stops if LaTeX fails.
+## Limits
+
+- Requires `pdflatex`; compilation errors stop the script.

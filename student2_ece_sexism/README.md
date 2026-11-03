@@ -3,9 +3,9 @@
 `src/train.py` trains BERT, RoBERTa, and a BiLSTM on the SemEval-2023 Task 10 EDOS split.
 
 ```text
-+-----------------------------+  reads  +--------------+  writes  +---------------------+
-| edos_labelled_aggregated.csv | ------> | src/train.py | -------> | results/results.csv |
-+-----------------------------+         +--------------+          +---------------------+
++------------------------------+  reads   +--------------+  writes  +---------------------+
+| edos_labelled_aggregated.csv | -------->| src/train.py | -------->| results/results.csv |
++------------------------------+          +--------------+          +---------------------+
 ```
 
 ## Run

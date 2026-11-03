@@ -3,9 +3,9 @@
 Three course experiments compare LSTM, BERT, and RoBERTa classifiers on media bias, sexism, and ghost-job risk.
 
 ```text
-+-------------+  loads  +---------+  writes  +----------------------+
-| BABEDataset | ------> | main.py | -------> | results/results.json |
-+-------------+         +---------+          +----------------------+
++-------------+  loads   +---------+  writes  +----------------------+
+| BABEDataset | -------->| main.py | -------->| results/results.json |
++-------------+          +---------+          +----------------------+
 ```
 
 ## Run
@@ -61,9 +61,9 @@ Export overrides in the shell; the scripts do not load `.env` automatically.
 ## CI
 
 ```text
-+------------+  runs  +---------------------+  uses  +-----------------+  runs  +------------+  runs  +--------+
-| checks.yml | -----> | actions/checkout@v4 | -----> | setup-python@v5 | -----> | compileall | -----> | bash -n |
-+------------+        +---------------------+        +-----------------+        +------------+        +--------+
++------------+  runs    +---------------------+  uses    +-----------------+  runs    +------------+  runs    +---------+
+| checks.yml | -------->| actions/checkout@v4 | -------->| setup-python@v5 | -------->| compileall | -------->| bash -n |
++------------+          +---------------------+          +-----------------+          +------------+          +---------+
 ```
 
 CI checks syntax only; it does not train the models.
