@@ -10,23 +10,16 @@ Three course experiments compare LSTM, BERT, and RoBERTa classifiers on media bi
 
 ## Run
 
-Python 3.11.11; run from the repository root with a separate virtual environment for each experiment.
+Use Python 3.11.11 and a separate virtual environment per experiment; run these commands from the repository root.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-On Windows, activate with `.venv\Scripts\activate`.
-
-Media bias (downloads BABE):
+Media bias:
 
 ```bash
 python -m pip install -r student1_atakan_media_bias/requirements.txt
 python student1_atakan_media_bias/main.py
 ```
 
-Sexism (requires `student2_ece_sexism/data/edos_labelled_aggregated.csv`):
+Sexism (place `edos_labelled_aggregated.csv` in `student2_ece_sexism/data/`):
 
 ```bash
 python -m pip install -r student2_ece_sexism/requirements.txt
@@ -34,29 +27,29 @@ python student2_ece_sexism/src/train.py
 python student2_ece_sexism/src/plot.py
 ```
 
-Ghost-job risk (downloads Zenodo record 20321172):
+Ghost-job risk:
 
 ```bash
 python -m pip install -r student3_talha_ghost_job_classifier/requirements.txt
 python student3_talha_ghost_job_classifier/main.py
 ```
 
-Build the LaTeX files with `bash report/render.sh` and `bash presentation/render.sh` after installing `pdflatex`.
+With `pdflatex` installed, build the report and slides using `bash report/render.sh` and `bash presentation/render.sh`.
 
 ## Config
 
 | var | default | what |
 | --- | --- | --- |
-| `EDOS_DATA_PATH` | `student2_ece_sexism/data/edos_labelled_aggregated.csv` | EDOS input CSV |
-| `GHOST_JOB_DATASET_URL` | `https://zenodo.org/api/records/20321172/files/unified_core.parquet/content` | Ghost-job dataset download |
+| `EDOS_DATA_PATH` | `student2_ece_sexism/data/edos_labelled_aggregated.csv` | EDOS input |
+| `GHOST_JOB_DATASET_URL` | `https://zenodo.org/api/records/20321172/files/unified_core.parquet/content` | Ghost-job parquet source |
 
-Export overrides in the shell; the scripts do not load `.env` automatically.
+Export overrides in the shell; `.env` is not loaded automatically.
 
 ## Limits
 
-- EDOS data and fine-tuned model weights are not included.
-- Runs need pretrained model downloads and can be slow without a GPU.
-- Recorded metrics are from course runs, not CI.
+- EDOS data and fine-tuned checkpoints are not included.
+- Training needs model downloads and may be slow on CPU.
+- CI does not retrain models or verify reported scores.
 
 ## CI
 
@@ -65,5 +58,3 @@ Export overrides in the shell; the scripts do not load `.env` automatically.
 | checks.yml | -------->| actions/checkout@v4 | -------->| setup-python@v5 | -------->| compileall | -------->| bash -n |
 +------------+          +---------------------+          +-----------------+          +------------+          +---------+
 ```
-
-CI checks syntax only; it does not train the models.
