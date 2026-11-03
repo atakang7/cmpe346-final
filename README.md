@@ -36,6 +36,7 @@ python student1_atakan_media_bias/main.py
 ## Docs
 
 - [Documentation index](docs/README.md)
+- [Contributing](CONTRIBUTING.md)
 - [Build the report and slides](docs/how-to/build-submission.md)
 - [Data and output formats](docs/reference/data-and-outputs.md)
 - [Architecture](docs/explanation/architecture.md)
