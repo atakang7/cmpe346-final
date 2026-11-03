@@ -1,13 +1,10 @@
 # Presentation
 
-`render.sh` compiles `presentation.tex` into `2_cmpe346_final_presentation.pdf`.
+Edit `presentation.tex` — search for `[Student 2]` or `[Student 3]` to find your placeholders.
 
-## Run
+Fill in: task, dataset, results table, key findings, conclusion.
 
+To compile:
 ```bash
-bash presentation/render.sh
+bash render.sh
 ```
-
-## Limits
-
-- Requires `pdflatex`; compilation errors stop the script.

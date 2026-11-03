@@ -1,29 +1,50 @@
-# Ghost-job risk classification
+# Talha Demir — Ghost-Job Risk Classification
 
-`main.py` trains LSTM, BERT, and RoBERTa classifiers on job-posting text labeled by visible hiring language.
+This folder contains the Student 3 component for the CMPE346 Group 2 final
+project.
 
-```text
-+-----------------+  downloads  +------------+  loads   +---------+  writes  +----------------------+
-| Zenodo 20321172 | ----------->| dataset.py | -------->| main.py | -------->| results/results.json |
-+-----------------+             +------------+          +---------+          +----------------------+
-```
+## Task
+
+Binary text classification of job postings:
+
+- `0`: realistic / no visible ghost-job evidence
+- `1`: likely ghost-job risk based on visible textual evidence
+
+The model does not prove whether a company truly hired. It detects visible
+signals such as contingent award, pending funding, future-only opportunities,
+talent-pool wording, and no-current-opening language.
+
+## Dataset
+
+Source: Zenodo record `20321172`, `unified_core.parquet`.
+
+The script downloads the parquet file on first run and creates local splits
+under `data/`. These files are ignored by git.
+
+## Models
+
+- LSTM trained from scratch
+- BERT (`bert-base-uncased`)
+- RoBERTa (`roberta-base`)
 
 ## Run
 
-From the repository root with Python 3.11.11:
-
 ```bash
-python -m pip install -r student3_talha_ghost_job_classifier/requirements.txt
-python student3_talha_ghost_job_classifier/main.py
+python3 main.py
 ```
 
-## Config
+Outputs:
 
-| var | default | what |
-| --- | --- | --- |
-| `GHOST_JOB_DATASET_URL` | `https://zenodo.org/api/records/20321172/files/unified_core.parquet/content` | Parquet source |
+```text
+results/results.json
+results/model_comparison.png
+results/confusion_matrices.png
+results/training_curves.png
+```
 
-## Limits
+Local generated files that should not be committed:
 
-- Labels reflect posting text, not verified hiring outcomes.
-- First run requires network access; checkpoints in `saved_models/` are reused.
+```text
+data/
+saved_models/
+```

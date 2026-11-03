@@ -1,13 +1,10 @@
 # Report
 
-`render.sh` compiles `template346.tex` into `2_cmpe346_final.pdf`.
+Edit `template346.tex` — search for `[Student 2]` or `[Student 3]` to find your placeholders.
 
-## Run
+Fill in: Methodology, Experiments & Findings, Discussion, Conclusion.
 
+To compile:
 ```bash
-bash report/render.sh
+bash render.sh
 ```
-
-## Limits
-
-- Requires `pdflatex`; compilation errors stop the script.
