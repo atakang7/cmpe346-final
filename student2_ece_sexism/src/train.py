@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 import torch
 import pandas as pd
 from torch.utils.data import DataLoader
@@ -12,8 +14,9 @@ from models.lstm_model import LSTMClassifier
 
 
 # Config
-DATA_PATH = "../data/edos_labelled_aggregated.csv"
-RESULTS_PATH = "../results/results.csv"
+BASE_DIR = Path(__file__).resolve().parents[1]
+DATA_PATH = Path(os.environ.get("EDOS_DATA_PATH", BASE_DIR / "data" / "edos_labelled_aggregated.csv"))
+RESULTS_PATH = BASE_DIR / "results" / "results.csv"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 BATCH_SIZE = 32
@@ -211,7 +214,9 @@ def train_lstm():
 # Main
 if __name__ == "__main__":
     print(f"Using device: {DEVICE}")
-    os.makedirs("../results", exist_ok=True)
+    if not DATA_PATH.is_file():
+        raise FileNotFoundError(f"EDOS dataset not found: {DATA_PATH}")
+    RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     results = []
     results.append(train_bert())

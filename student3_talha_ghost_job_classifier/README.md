@@ -1,50 +1,22 @@
-# Talha Demir — Ghost-Job Risk Classification
+# Ghost-job risk classification
 
-This folder contains the Student 3 component for the CMPE346 Group 2 final
-project.
+Binary text classification of job postings using an LSTM, BERT, and RoBERTa. A positive label means the text includes wording associated with uncertain or future hiring; it does not establish whether the employer intended to hire.
 
-## Task
+## Dataset and labels
 
-Binary text classification of job postings:
-
-- `0`: realistic / no visible ghost-job evidence
-- `1`: likely ghost-job risk based on visible textual evidence
-
-The model does not prove whether a company truly hired. It detects visible
-signals such as contingent award, pending funding, future-only opportunities,
-talent-pool wording, and no-current-opening language.
-
-## Dataset
-
-Source: Zenodo record `20321172`, `unified_core.parquet`.
-
-The script downloads the parquet file on first run and creates local splits
-under `data/`. These files are ignored by git.
-
-## Models
-
-- LSTM trained from scratch
-- BERT (`bert-base-uncased`)
-- RoBERTa (`roberta-base`)
+The input is `unified_core.parquet` from Zenodo record `20321172`. On first use, `dataset.py` downloads it into `data/`, filters records, derives labels from visible wording, and creates train/validation/test CSV files. Set `GHOST_JOB_DATASET_URL` to override the source URL. The dataset and model weights are not committed.
 
 ## Run
 
+From the repository root with Python 3.11.11:
+
 ```bash
-python3 main.py
+python -m pip install -r student3_talha_ghost_job_classifier/requirements.txt
+python student3_talha_ghost_job_classifier/main.py
 ```
 
-Outputs:
+Metrics are written to `results/results.json`; figures go to the same directory. The scripts reuse checkpoints in `saved_models/` when present. Delete that directory to retrain.
 
-```text
-results/results.json
-results/model_comparison.png
-results/confusion_matrices.png
-results/training_curves.png
-```
+## Limits
 
-Local generated files that should not be committed:
-
-```text
-data/
-saved_models/
-```
+The labels come from a set of text patterns and an existing assessment field, not verified hiring outcomes. The download requires network access, and the models may take time to train without a GPU.

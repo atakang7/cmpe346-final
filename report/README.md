@@ -1,10 +1,9 @@
 # Report
 
-Edit `template346.tex` — search for `[Student 2]` or `[Student 3]` to find your placeholders.
+The LaTeX source is `template346.tex`; figures are under `figures/`. With `pdflatex` installed, run from the repository root:
 
-Fill in: Methodology, Experiments & Findings, Discussion, Conclusion.
-
-To compile:
 ```bash
-bash render.sh
+bash report/render.sh
 ```
+
+The script writes `report/2_cmpe346_final.pdf` and stops if LaTeX fails.

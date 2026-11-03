@@ -1,10 +1,9 @@
 # Presentation
 
-Edit `presentation.tex` — search for `[Student 2]` or `[Student 3]` to find your placeholders.
+The slide source is `presentation.tex`. With `pdflatex` installed, run from the repository root:
 
-Fill in: task, dataset, results table, key findings, conclusion.
-
-To compile:
 ```bash
-bash render.sh
+bash presentation/render.sh
 ```
+
+The script writes `presentation/2_cmpe346_final_presentation.pdf` and stops if LaTeX fails.
