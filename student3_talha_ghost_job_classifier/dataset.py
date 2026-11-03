@@ -7,7 +7,6 @@ CSV files. Datasets and generated CSVs are ignored by git.
 """
 from collections import Counter
 from pathlib import Path
-import os
 import re
 
 import pandas as pd
@@ -23,10 +22,7 @@ NEGATIVE_RATIO = 3
 DATA_DIR = Path(__file__).resolve().parent / "data"
 RAW_PATH = DATA_DIR / "unified_core.parquet"
 PROCESSED_DIR = DATA_DIR / "processed_ghost_adjudicated_ratio3"
-ZENODO_URL = os.environ.get(
-    "GHOST_JOB_DATASET_URL",
-    "https://zenodo.org/api/records/20321172/files/unified_core.parquet/content",
-)
+ZENODO_URL = "https://zenodo.org/api/records/20321172/files/unified_core.parquet/content"
 
 READ_COLUMNS = [
     "uid",
@@ -175,20 +171,13 @@ def download_raw_data() -> None:
     if RAW_PATH.exists():
         return
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    partial_path = RAW_PATH.with_suffix(".parquet.part")
     print(f"Downloading dataset to {RAW_PATH}")
-    try:
-        with requests.get(ZENODO_URL, stream=True, timeout=(10, 60)) as response:
-            response.raise_for_status()
-            with partial_path.open("wb") as file:
-                for chunk in response.iter_content(chunk_size=1024 * 1024):
-                    if chunk:
-                        file.write(chunk)
-        if partial_path.stat().st_size == 0:
-            raise ValueError("Downloaded dataset is empty")
-        partial_path.replace(RAW_PATH)
-    finally:
-        partial_path.unlink(missing_ok=True)
+    with requests.get(ZENODO_URL, stream=True, timeout=60) as response:
+        response.raise_for_status()
+        with RAW_PATH.open("wb") as file:
+            for chunk in response.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    file.write(chunk)
 
 
 def add_group_key(df: pd.DataFrame) -> pd.DataFrame:

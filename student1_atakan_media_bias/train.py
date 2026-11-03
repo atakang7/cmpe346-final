@@ -72,7 +72,7 @@ def train(model, train_loader, val_loader, epochs, lr, device, use_scheduler=Tru
         improvement = f1 - best_f1
         print(f"Epoch {epoch + 1}/{epochs} — Loss: {loss:.4f} | Val F1: {f1:.4f} | Δ {improvement:+.4f}")
 
-        if best_model_state is None or improvement >= MIN_IMPROVEMENT:
+        if improvement >= MIN_IMPROVEMENT:
             best_f1 = f1
             best_model_state = copy.deepcopy(model.state_dict())
             no_improve = 0

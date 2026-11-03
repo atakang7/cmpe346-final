@@ -1,38 +1,52 @@
-# EDOS sexism detection
+# CMPE 346 - NLP Final Project
+## Sexism Detection using LSTM, BERT, and RoBERTa
 
-`src/train.py` trains BERT, RoBERTa, and a BiLSTM on the SemEval-2023 Task 10 EDOS split.
+### Project Structure
+FinalProjectCMPE346/
+├── data/
+│   └── edos_labelled_aggregated.csv
+├── results/
+│   ├── results.csv
+│   └── evaluation_report.txt
+├── src/
+│   ├── models/
+│   │   ├── init.py
+│   │   ├── bert_model.py
+│   │   ├── roberta_model.py
+│   │   └── lstm_model.py
+│   ├── init.py
+│   ├── dataset.py
+│   ├── train.py
+│   └── evaluate.py
+├── README.md
+└── requirements.txt
 
-```text
-+------------------------------+  reads   +--------------+  writes  +---------------------+
-| edos_labelled_aggregated.csv | -------->| src/train.py | -------->| results/results.csv |
-+------------------------------+          +--------------+          +---------------------+
-```
+### Dataset
+- **Name:** EDOS (Explainable Detection of Online Sexism)
+- **Source:** SemEval-2023 Task 10
+- **Task:** Binary Sexism Detection (sexist / not sexist)
+- **Size:** 20,000 samples (Train: 14,000 | Dev: 2,000 | Test: 4,000)
 
-## Run
-
-Place the EDOS CSV in `student2_ece_sexism/data/` and run from the repository root:
-
+### Requirements
 ```bash
-python -m pip install -r student2_ece_sexism/requirements.txt
-python student2_ece_sexism/src/train.py
-python student2_ece_sexism/src/plot.py
+pip install -r requirements.txt
 ```
 
-## Config
+### Training
+```bash
+cd src
+python train.py
+```
 
-| var | default | what |
-| --- | --- | --- |
-| `EDOS_DATA_PATH` | `student2_ece_sexism/data/edos_labelled_aggregated.csv` | Input CSV |
+### Evaluation
+```bash
+cd src
+python evaluate.py
+```
 
-## Results
-
-| model | accuracy | macro F1 |
-| --- | ---: | ---: |
-| BERT | 0.8565 | 0.8115 |
-| RoBERTa | 0.8545 | 0.7981 |
-| LSTM | 0.8365 | 0.7530 |
-
-## Limits
-
-- Input CSV must have `text`, `label_sexist`, and `split` columns.
-- Reported scores are from the course run; weights are not included.
+### Results
+| Model   | Accuracy | F1     |
+|---------|----------|--------|
+| BERT    | 0.8565   | 0.8115 |
+| RoBERTa | 0.8545   | 0.7981 |
+| LSTM    | 0.8365   | 0.7530 |
