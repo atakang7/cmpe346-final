@@ -1,26 +1,25 @@
-# CMPE 346: text classification
+# CMPE 346 final project
 
-Three independent course experiments compare an LSTM, BERT, and RoBERTa for news bias, online sexism, and ghost-job risk. Each experiment trains locally and writes evaluation results to its own folder.
+Three course experiments compare LSTM, BERT, and RoBERTa classifiers on media bias, sexism, and ghost-job risk.
 
-## Quick start
-
-Use Python 3.11.11. From the repository root:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
+```text
++-------------+  loads   +---------+  writes  +----------------------+
+| BABEDataset | -------->| main.py | -------->| results/results.json |
++-------------+          +---------+          +----------------------+
 ```
 
-On Windows, activate with `.venv\Scripts\activate` instead.
+## Run
 
-Run the media-bias experiment (the BABE dataset downloads on first use):
+Use Python 3.11.11 and a separate virtual environment per experiment; run these commands from the repository root.
+
+Media bias:
 
 ```bash
 python -m pip install -r student1_atakan_media_bias/requirements.txt
 python student1_atakan_media_bias/main.py
 ```
 
-Run the sexism experiment after placing `edos_labelled_aggregated.csv` in `student2_ece_sexism/data/`:
+Sexism (place `edos_labelled_aggregated.csv` in `student2_ece_sexism/data/`):
 
 ```bash
 python -m pip install -r student2_ece_sexism/requirements.txt
@@ -28,35 +27,34 @@ python student2_ece_sexism/src/train.py
 python student2_ece_sexism/src/plot.py
 ```
 
-Run the ghost-job experiment (downloads `unified_core.parquet` from Zenodo record 20321172):
+Ghost-job risk:
 
 ```bash
 python -m pip install -r student3_talha_ghost_job_classifier/requirements.txt
 python student3_talha_ghost_job_classifier/main.py
 ```
 
-Install each experiment's requirements in a separate virtual environment if running more than one; their dependency versions are not locked together.
+With `pdflatex` installed, build the report and slides using `bash report/render.sh` and `bash presentation/render.sh`.
 
-## Configuration
+## Config
 
-- `EDOS_DATA_PATH`: optional path to the EDOS CSV when it is not under `student2_ece_sexism/data/`.
-- `GHOST_JOB_DATASET_URL`: optional override for the Zenodo parquet download URL.
-- `.env.example` lists these settings. Python does not load `.env` files automatically; export any overrides in your shell before running.
+| var | default | what |
+| --- | --- | --- |
+| `EDOS_DATA_PATH` | `student2_ece_sexism/data/edos_labelled_aggregated.csv` | EDOS input |
+| `GHOST_JOB_DATASET_URL` | `https://zenodo.org/api/records/20321172/files/unified_core.parquet/content` | Ghost-job parquet source |
 
-The datasets, cached weights, and generated results live under the experiment folders. Datasets and checkpoints are excluded from Git.
+Export overrides in the shell; `.env` is not loaded automatically.
 
-## How it works
+## Limits
 
-Each experiment loads its own labeled text, trains three binary classifiers, then reports metrics on a held-out split. Student 1 uses the BABE dataset with accuracy and weighted F1; Student 2 uses EDOS with accuracy and macro F1; Student 3 labels job postings using visible wording and reports accuracy, precision, recall, and weighted F1.
+- EDOS data and fine-tuned checkpoints are not included.
+- Training needs model downloads and may be slow on CPU.
+- CI does not retrain models or verify reported scores.
 
-See the README in each experiment folder for the dataset details and recorded results.
+## CI
 
-## Usage and report builds
-
-These are local training scripts, not a deployed service. The media-bias and ghost-job scripts write JSON and PNG figures under their `results/` directories. The sexism script writes `results/results.csv`; `src/plot.py` generates its chart.
-
-To build the written report or slides, install `pdflatex` and run `bash report/render.sh` or `bash presentation/render.sh` from the repository root.
-
-## Limitations
-
-Training downloads pretrained model weights and may be slow on CPU. The EDOS CSV is not included; you must obtain it from the SemEval-2023 Task 10 dataset release. Recorded metrics reflect earlier local runs, not a CI benchmark. GitHub Actions checks Python and shell syntax only; it does not retrain models or validate the datasets.
+```text
++------------+  runs    +---------------------+  uses    +-----------------+  runs    +------------+  runs    +---------+
+| checks.yml | -------->| actions/checkout@v4 | -------->| setup-python@v5 | -------->| compileall | -------->| bash -n |
++------------+          +---------------------+          +-----------------+          +------------+          +---------+
+```
