@@ -1,50 +1,51 @@
-# Talha Demir — Ghost-Job Risk Classification
+Part of [cmpe346-final](../README.md)
 
-This folder contains the Student 3 component for the CMPE346 Group 2 final
-project.
+# Ghost-job risk classification
 
-## Task
+Classifies job postings as realistic (0) or likely ghost-job risk (1) from visible text signals.
 
-Binary text classification of job postings:
-
-- `0`: realistic / no visible ghost-job evidence
-- `1`: likely ghost-job risk based on visible textual evidence
-
-The model does not prove whether a company truly hired. It detects visible
-signals such as contingent award, pending funding, future-only opportunities,
-talent-pool wording, and no-current-opening language.
-
-## Dataset
-
-Source: Zenodo record `20321172`, `unified_core.parquet`.
-
-The script downloads the parquet file on first run and creates local splits
-under `data/`. These files are ignored by git.
-
-## Models
-
-- LSTM trained from scratch
-- BERT (`bert-base-uncased`)
-- RoBERTa (`roberta-base`)
+```text
++------------+  batches  +---------+  scores  +---------+
+| dataset.py | --------> | main.py | -------> | plot.py |
++------------+           +---------+          +---------+
+```
 
 ## Run
 
+From this directory with Python 3.11:
+
 ```bash
-python3 main.py
+python -m pip install -r requirements.txt
+python main.py
 ```
 
-Outputs:
+The first run downloads the Zenodo parquet file and creates local data splits.
 
-```text
-results/results.json
-results/model_comparison.png
-results/confusion_matrices.png
-results/training_curves.png
+## Test
+
+```bash
+python -m compileall -q .
 ```
 
-Local generated files that should not be committed:
+## Config
 
-```text
-data/
-saved_models/
-```
+| Var | Default | What |
+| --- | --- | --- |
+| `EPOCHS` | 3 | Training epochs |
+| `BATCH_SIZE` | 8 | Samples per batch |
+| `MAX_LENGTH` | 256 | Tokens per sample |
+| `NEGATIVE_RATIO` | 3 | Maximum negatives per positive, per split |
+
+The training constants are in `main.py`; `NEGATIVE_RATIO` is in `dataset.py`.
+
+## Interfaces
+
+| Path | Reads or writes |
+| --- | --- |
+| `data/unified_core.parquet` | Downloads Zenodo record `20321172` |
+| `data/processed_ghost_adjudicated_ratio3/*.csv` | Writes train, validation, and test splits |
+| `saved_models/*.pt` | Writes and reloads model weights |
+| `results/results.json` | Writes accuracy, precision, recall, weighted F1 |
+| `results/*.png` | Writes comparison, confusion matrices, and loss plots |
+
+Positive labels come from rule matches against the posting text. See [architecture](../docs/explanation/architecture.md).

@@ -1,10 +1,10 @@
-import os
+from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_results(results_path="../results/results.csv", output_path="../results/comparison.png"):
+def plot_results(results_path=None, output_path=None):
     """
     Reads the model results from a CSV file and generates a grouped bar chart
     comparing Accuracy and F1 scores across models.
@@ -13,6 +13,11 @@ def plot_results(results_path="../results/results.csv", output_path="../results/
         results_path : path to the results.csv file
         output_path  : path where the generated chart will be saved
     """
+    results_dir = Path(__file__).resolve().parent.parent / "results"
+    if results_path is None:
+        results_path = results_dir / "results.csv"
+    if output_path is None:
+        output_path = results_dir / "comparison.png"
     df = pd.read_csv(results_path)
 
     models = df["model"].tolist()
@@ -46,6 +51,7 @@ def plot_results(results_path="../results/results.csv", output_path="../results/
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300)
+    plt.close(fig)
     print(f"Chart saved to {output_path}")
 
 

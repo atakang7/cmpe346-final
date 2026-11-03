@@ -172,12 +172,17 @@ def download_raw_data() -> None:
         return
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Downloading dataset to {RAW_PATH}")
-    with requests.get(ZENODO_URL, stream=True, timeout=60) as response:
-        response.raise_for_status()
-        with RAW_PATH.open("wb") as file:
-            for chunk in response.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    file.write(chunk)
+    temporary_path = RAW_PATH.with_suffix(".parquet.part")
+    try:
+        with requests.get(ZENODO_URL, stream=True, timeout=60) as response:
+            response.raise_for_status()
+            with temporary_path.open("wb") as file:
+                for chunk in response.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        file.write(chunk)
+        temporary_path.replace(RAW_PATH)
+    finally:
+        temporary_path.unlink(missing_ok=True)
 
 
 def add_group_key(df: pd.DataFrame) -> pd.DataFrame:
