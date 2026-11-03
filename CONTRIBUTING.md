@@ -1,12 +1,14 @@
-# Contributing
+# Code
 
-Keep changes to each classifier in its student directory. The [data formats](docs/reference/data-and-outputs.md) differ between experiments.
-
-From the repository root, check Python and render script syntax before opening a pull request:
-
+1. Copy `student1_atakan_media_bias/` and rename it to `studentN_yourname_yourtopic/`
+2. Edit `dataset.py` to load your dataset — use student1 as reference
+3. Edit `main.py` — change your name, ID, topic, dataset at the top
+4. Run:
 ```bash
-python -m compileall -q student1_atakan_media_bias student2_ece_sexism student3_talha_ghost_job_classifier
-bash -n report/render.sh presentation/render.sh
+python3 main.py
 ```
+Results save automatically to `results/results.json`.
 
-For model changes, run the relevant experiment using its README commands and inspect the saved metrics. Do not commit datasets, checkpoints, notebooks, or generated PDFs.
+5. Commit your folder and push
+
+**Do not** submit notebooks, model weights, or datasets.

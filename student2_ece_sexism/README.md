@@ -1,50 +1,52 @@
-Part of [cmpe346-final](../README.md)
+# CMPE 346 - NLP Final Project
+## Sexism Detection using LSTM, BERT, and RoBERTa
 
-# Sexism detection
+### Project Structure
+FinalProjectCMPE346/
+├── data/
+│   └── edos_labelled_aggregated.csv
+├── results/
+│   ├── results.csv
+│   └── evaluation_report.txt
+├── src/
+│   ├── models/
+│   │   ├── init.py
+│   │   ├── bert_model.py
+│   │   ├── roberta_model.py
+│   │   └── lstm_model.py
+│   ├── init.py
+│   ├── dataset.py
+│   ├── train.py
+│   └── evaluate.py
+├── README.md
+└── requirements.txt
 
-Classifies EDOS posts as sexist (1) or not sexist (0) with an LSTM, BERT, and RoBERTa.
+### Dataset
+- **Name:** EDOS (Explainable Detection of Online Sexism)
+- **Source:** SemEval-2023 Task 10
+- **Task:** Binary Sexism Detection (sexist / not sexist)
+- **Size:** 20,000 samples (Train: 14,000 | Dev: 2,000 | Test: 4,000)
 
-```text
-+----------------+  batches  +--------------+  CSV  +-------------+
-| src/dataset.py | --------> | src/train.py | ----> | src/plot.py |
-+----------------+           +--------------+       +-------------+
-```
-
-## Run
-
-From this directory with Python 3.11:
-
+### Requirements
 ```bash
-python -m pip install -r requirements.txt
-python src/train.py
-python src/plot.py
+pip install -r requirements.txt
 ```
 
-Put the aggregated EDOS CSV at `data/edos_labelled_aggregated.csv` before training. See [prepare EDOS data](../docs/how-to/prepare-edos.md).
-
-## Test
-
+### Training
 ```bash
-python -m compileall -q src
+cd src
+python train.py
 ```
 
-## Config
+### Evaluation
+```bash
+cd src
+python evaluate.py
+```
 
-| Var | Default | What |
-| --- | --- | --- |
-| `BATCH_SIZE` | 32 | Samples per batch |
-| `MAX_LENGTH` | 128 | Tokens per sample |
-| `EPOCHS` | 3 | Training epochs |
-| `LEARNING_RATE` | 2e-5 | BERT and RoBERTa learning rate |
-
-These constants are in `src/train.py`.
-
-## Interfaces
-
-| Path | Reads or writes |
-| --- | --- |
-| `data/edos_labelled_aggregated.csv` | Reads labeled text and train/dev/test split |
-| `results/results.csv` | Writes model, accuracy, and macro F1 |
-| `results/comparison.png` | Plot output from `src/plot.py` |
-
-See [dataset and result formats](../docs/reference/data-and-outputs.md).
+### Results
+| Model   | Accuracy | F1     |
+|---------|----------|--------|
+| BERT    | 0.8565   | 0.8115 |
+| RoBERTa | 0.8545   | 0.7981 |
+| LSTM    | 0.8365   | 0.7530 |

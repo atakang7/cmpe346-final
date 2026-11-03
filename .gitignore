@@ -6,7 +6,6 @@
 data/
 */data/
 *.parquet
-*.part
 saved_models/
 *.pt
 *.pth
@@ -40,4 +39,3 @@ __pycache__/
 *.pyo
 .env
 venv/
-.venv/
