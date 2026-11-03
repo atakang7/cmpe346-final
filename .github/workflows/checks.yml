@@ -1,0 +1,20 @@
+name: checks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Compile Python sources
+        run: |
+          python -m compileall -q student1_atakan_media_bias student2_ece_sexism student3_talha_ghost_job_classifier
+      - name: Check shell scripts
+        run: bash -n presentation/render.sh report/render.sh
